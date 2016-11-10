@@ -9,9 +9,6 @@ var paymentsRowCount = 0;
 var estimatesRowCount = 0;
 var accBal = 0;
 
-function collapseNav() {
-        document.getElementById("my_navbar").className = "navbar-collapse collapse";
-}
 /** 
 * @input current date
 * @output current date format
