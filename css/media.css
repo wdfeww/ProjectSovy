@@ -93,3 +93,23 @@ body{
 .copy{
 	text-align: center;
  }
+
+/*this makes the small owlhead wink*/
+#wink{
+	position:relative;
+	margin:0 auto;
+	padding-right:50px;
+}
+
+#wink img {
+	position:absolute;
+	left:0;
+	-webkit-transition: opacity 1s ease-in-out;
+	-moz-transition:opacity 0.5s ease-in-out;
+	-o-transition: opacity 0.5s ease-in-out;
+	transition:opacity 0.5s ease-in-out;
+}
+
+#wink img.owlhead-top:hover{
+	opacity:0;
+}
