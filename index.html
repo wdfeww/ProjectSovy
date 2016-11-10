@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/media.css" />  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Sovy Banking</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <script src="js/EC.js"></script>
+     <link rel="stylesheet" type="text/css" href="css/EC.css">
+</head>
+<body>
+    <!--navigation-->
+    <header>
+        <div class="page-header">
+            <img src="images/sovy_owl.png" class="logo">
+            <h1 class="header_text">SOVY BANKING</h1>
+        </div>
+        <nav class="navbar navbar-inverse navbar-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#my_navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#home" data-toggle="tab"><img src="#" alt="put owl here" /></a>
+                </div>
+                <div class="collapse navbar-collapse" id="my_navbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a data-toggle="tab" href="#home" onclick="collapseNav()">Home</a></li>
+                        <li><a data-toggle="tab" href="#estimates" onclick="collapseNav()">Estimates</a></li>
+                        <li><a data-toggle="tab" href="#incomes" onclick="collapseNav()">Incomes</a></li>
+                        <li><a data-toggle="tab" href="#payments" onclick="collapseNav()">Payments</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a data-toggle="tab" href="#euro_calculator" onclick="collapseNav()">Euro Calculator</a></li>
+                                <li><a data-toggle="tab" href="#iban_calculator" onclick="collapseNav()">IBAN Calculator</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!--end navigation-->
+     <div class="container">
+        <p align="right" id="acc_balance">Account Balance<br /><span id="balance_value">0</span></p>
+    <!--tab content-->
+        <div class="tab-content">
+         <!--HOME-->
+            <div id="home" class="tab-pane fade in active">
+                <h3>Home</h3>
+                <p>We are working hard on home..</p>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:40%"></div>
+                </div>
+            </div>
+         <!--END HOME-->
+         <!--ESTIMATES-->
+            <div id="estimates" class="tab-pane fade in">
+                <h3>Estimates</h3>
+                <div class="responsiveTable" style="overflow-x: auto;">
+                    <table class="table table-striped" id="estimates_table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--here will be added rows through js-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+         <!--END ESTIMATES-->
+         <!--INCOMES-->
+            <div id="incomes" class="tab-pane fade in">
+                <h3>Add income</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="type">Type:</label>
+                        <input type="text" class="form-control" id="income_type" pattern=".{1,}" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount:</label>
+                        <input type="number" class="form-control" id="income_amount" min="10" required />
+                    </div>
+                    <button type="button" class="btn btn-info" id="submit_income">add</button>
+                </form>
+                <hr />
+                <div class="responsiveTable" style="overflow-x: auto;">
+                    <table class="table table-striped" id="incomes_table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--here will be added rows through js-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+         <!--END INCOMES-->
+         <!--PAYMENTS-->
+            <div id="payments" class="tab-pane fade in">
+                <h3>Add Payment</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="type">Type:</label>
+                        <input type="text" class="form-control" id="payment_type" pattern=".{1,}" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount:</label>
+                        <input type="number" class="form-control" id="payment_amount" min="10" required />
+                    </div>
+                    <button type="button" class="btn btn-info" id="submit_payment">add</button>
+                </form>
+                <hr />
+                <div class="responsiveTable" style="overflow-x: auto;">
+                    <table class="table table-striped" id="payments_table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--here will be added rows through js-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+         <!--END PAYMENTS-->
+         <!--IBAN CALCULATOR-->
+            <div id="iban_calculator" class="tab-pane fade in">
+                <h3>IBAN Calculator</h3>
+                <p>We are working hard on IBAN Calculator..</p>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:40%"></div>
+                </div>
+            </div>
+         <!--END IBAN CALCULATOR-->
+         <!--EURO CALCULATOR-->
+            <div id="euro_calculator" class="tab-pane fade in">
+                <h3>Euro calculator</h3>
+                 <div class="form-group" style="margin-left:15px">
+      
+    
+    <input type="number" id="eurInput" onkeyup="convertCur()" placeholder="Euro" ><label style="margin-left:10px">EUR</label>
+<form>
+     <input type="radio" onclick="convertCur()" name="curren" id="usd" alt="USD"/><label for="usd"></label>
+     <input type="radio" onclick="convertCur()" name="curren" id="gbp" /><label for="gbp"></label>
+     <input type="radio" onclick="convertCur()" name="curren" id="aud" /><label for="aud"></label>  
+     <input type="radio" onclick="convertCur()" name="curren" id="czk" /><label for="czk"></label> 
+     <input type="radio" onclick="convertCur()" name="curren" id="cad" /><label for="cad"></label> 
+     <input type="radio" onclick="convertCur()" name="curren" id="chf" /><label for="chf"></label>
+</form>
+<input type="text" id="calculated" /><label for="calculated" ></label> 
+   <p type="number" id="curCalOut" />
+                     </div>
+                </div>
+         <!--END EURO CALCULATOR-->    
+        </div> <!--end tab content-->
+    </div><!--end container-->
+
+<footer >
+	<div class="footer">
+	    <div class="socialnav">
+		   <ul class="social">
+		        <li><a href="https://github.com/wdfeww/ProjectSovy" class="social-icon"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a></li>
+		        <li><a href="https://www.facebook.com/itakademiasovy/" class="social-icon"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a></li>
+		        <li><a href="#" class="social-icon"><i class="fa fa-google-plus-official fa-2x" aria-hidden="true"></i></a></li>
+		        <li><a href="#" class="social-icon"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a></li>
+	           
+		   </ul>
+	    </div>
+	</div>
+</footer>
+
+    <script src="js/forms.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</body>
+</html>
