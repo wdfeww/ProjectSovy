@@ -87,6 +87,7 @@ body{
 .social-icon:hover,
 .social-icon:focus{
 	color: #ffffff;
+	font-size: 19px;
 }
 .footer{
 	padding-bottom: 5px;
@@ -122,4 +123,8 @@ body{
 
 #wink img.owlhead-top:hover{
 	opacity:0;
+}
+
+a{
+	cursor: pointer;
 }
