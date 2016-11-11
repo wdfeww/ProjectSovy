@@ -124,3 +124,7 @@ body{
 #wink img.owlhead-top:hover{
 	opacity:0;
 }
+
+a{
+	cursor: pointer;
+}
