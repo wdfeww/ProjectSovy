@@ -157,7 +157,7 @@ function addIncome() {
     var value = document.getElementById("income_amount");
     var type = document.getElementById("income_type");
     var temp;
-    if (value.value >= 10 && type.checkValidity()) {
+    if (value.value >= 10 && value.value<=10000000000 && type.checkValidity()) {
         var num = value.value;
         num = Math.round(num * 100) / 100;
         num *= 100;
@@ -210,7 +210,7 @@ function addIncome() {
 function addPayment() {
     var value = document.getElementById("payment_amount");
     var type = document.getElementById("payment_type");
-    if (value.value >= 10 && type.checkValidity()) {
+    if (value.value >= 10 && value.value<= 10000000000 && type.checkValidity()) {
         var num = value.value;
         num = Math.round(num * 100) / 100;
         num *= 100;
