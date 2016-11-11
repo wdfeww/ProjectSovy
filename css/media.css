@@ -87,6 +87,7 @@ body{
 .social-icon:hover,
 .social-icon:focus{
 	color: #ffffff;
+	font-size: 19px;
 }
 .footer{
 	padding-bottom: 5px;
