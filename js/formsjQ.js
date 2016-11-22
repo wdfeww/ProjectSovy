@@ -76,17 +76,21 @@ $(document).ready(function () {
 
 				if(input.getTab() == "incomes-tab"){
 					var incomesTable = $('#incomes-table tbody');
-					// style row here using addClass()
+					$("tr").addClass("bg-success");
 					incomesTable.append(row);
+					
 				}
 				else if(input.getTab() == "payments-tab"){
 					var paymentsTable = $('#payments-table tbody');
-					// style row here using addClass()
+					$("tr").addClass("bg-danger");
 					paymentsTable.append(row);
+					
 				}
 
 				var turnoversTable = $('#turnovers-table tbody');
+				$("tr").addClass("bg-info");
 				turnoversTable.append(row);
+				
 
 			},
 		};
@@ -100,13 +104,13 @@ $(document).ready(function () {
 				}
 				$('#balance-value').text(sum/100);
 			}
-
 			//style : 
 		};
 
 		button.on('click', function () {
 			input.createObject(input.getDescription(), input.getAmount());
 			balance.setValue();
+			
 			//balance.style();
 		});
 
