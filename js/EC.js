@@ -1,31 +1,20 @@
-function convertCur(){
-   var eur = document.getElementById("eurInput").value;
-    
-if(document.getElementById("usd").checked){
+$(document).ready(function () {
+    var convert = function () {
+        var output = $("#calculated");
+        var currenclyType = { usd: 1.08887, gbp: 0.87344, aud: 1.43688, czk: 27.0220, cad: 1.46707, chf: 1.07414 };
+        var value = ($("#eurInput").val())
+        var type = ($('input[name=curren]:checked', '#curType').attr("id"));
+        if (!$.isNumeric(value) ||  (value.indexOf('e') > -1)) {
+            output.val("Bad input!");
+            output.addClass("text-danger");
+        }
 
-   var cur = (eur*1.08887).toFixed(2)+" USD";
-    
-}
-      if(document.getElementById("gbp").checked){
-          var cur = (eur*0.87344).toFixed(2)+" GBP";
-   
-}
-          if(document.getElementById("aud").checked){
-              var cur = (eur*1.43688).toFixed(2)+" AUD";
+        else {
+            output.removeClass();
+            output.val((value * currenclyType[type]).toFixed(2) + " " + type.toUpperCase());
+        }
+      }
+    $("#eurInput").on("keyup", convert);
+    $("input[name=curren]:radio").on("click", convert);
 
-}
-        if(document.getElementById("czk").checked){
-            var cur = (eur*27.0220).toFixed(2)+" CZK";
-            
-} 
-        if(document.getElementById("cad").checked){
-               var cur = (eur*1.46707).toFixed(2)+" CAD";
-     
-} 
-     if(document.getElementById("chf").checked){
-               var cur = (eur*1.07414).toFixed(2)+" CHF";
-     
-} 
-    document.getElementById("calculated").value = cur;
-}
-
+});

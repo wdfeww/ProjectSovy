@@ -89,7 +89,7 @@ display:inline-block;
 }
 input[type="radio"]#chf + label
 {
-background: url("images/flags/CHFflag.png") no-repeat;
+background: url("../images/flags/CHFflag.png") no-repeat;
 background-size: 90%;
 height: 16px;
 width: 16px;
