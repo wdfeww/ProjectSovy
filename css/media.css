@@ -40,7 +40,8 @@ input[type=number]::-webkit-outer-spin-button {
 	height:100px;
     position: relative;
 }
-.header_text{
+
+.header-text{
 	float:left;
 	padding-left: 50px;
 	color:#5CA7A7;
