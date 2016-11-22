@@ -2,6 +2,14 @@ body{
     background-image: url("../images/carbon.jpg") !important;
 }
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
 .container{
     background-color: #c2d6d6;
     margin-top: 100px;
