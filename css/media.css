@@ -17,6 +17,15 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 15px;
 }
 
+.affix {
+      top: 0;
+      width: 100%;
+  }
+
+.affix + .container {
+    padding-top: 70px;
+}
+
 .balance{
 	font-weight:bold;
 	padding-right:10px;
