@@ -96,9 +96,9 @@ $(document).ready(function () {
 			setValue : function () {
 				var sum = 0, i;
 				for (i = 0; i < objects.length; i++) {
-					sum += objects[i].amount;
+					sum += (objects[i].amount)*100;
 				}
-				$('#balance-value').text(sum);
+				$('#balance-value').text(sum/100);
 			}
 
 			//style : 
