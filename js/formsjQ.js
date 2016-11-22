@@ -36,7 +36,7 @@ $(document).ready(function () {
 			},
 
 			test : function (d, a) {
-				if( d.length>0 && a>=1 && (a*100)%1 == 0 && typeof(a)=='number') return true;
+				if( d.length>0 && a>=1 && (a*100)%1 == 0 && typeof(a)=='number' d.charAt('<')==-1) return true;
 				else return false;
 			},
 
