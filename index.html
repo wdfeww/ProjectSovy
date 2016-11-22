@@ -40,8 +40,8 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a data-toggle="tab" href="#home" onclick="collapseNav()">Home</a></li>
                         <li><a data-toggle="tab" href="#turnovers" onclick="collapseNav()">Turnovers</a></li>
-                        <li><a data-toggle="tab" href="#incomes" onclick="collapseNav()">Incomes</a></li>
-                        <li><a data-toggle="tab" href="#payments" onclick="collapseNav()">Payments</a></li>
+                        <li id="incomes-tab"><a data-toggle="tab" href="#incomes" onclick="collapseNav()">Incomes</a></li>
+                        <li id="payments-tab"><a data-toggle="tab" href="#payments" onclick="collapseNav()">Payments</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -68,9 +68,9 @@
          <!--END HOME-->
          <!--turnovers-->
             <div id="turnovers" class="tab-pane fade in">
-                <h3>turnovers</h3>
+                <h3>Turnovers</h3>
                 <div class="responsiveTable" style="overflow-x: auto;">
-                    <table class="table table-striped" id="estimates-table">
+                    <table class="table table-striped" id="turnovers-table">
                         <thead>
                             <tr>
                                 <th>Date</th>
@@ -95,9 +95,9 @@
                     </div>
                     <div class="form-group">
                         <label for="amount">Amount:</label>
-                        <input type="number" class="form-control" id="income-amount" min="10" max="10000000000" required />
+                        <input type="number" class="form-control" id="income-amount" required />
                     </div>
-                    <button type="button" class="btn btn-info" id="submit-income">add</button>
+                    <button type="button" class="btn btn-info submit-button">add</button>
                 </form>
                 <hr />
                 <div class="responsiveTable" style="overflow-x: auto;">
@@ -107,7 +107,6 @@
                                 <th>Date</th>
                                 <th>Description</th>
                                 <th>Amount</th>
-                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -129,7 +128,7 @@
                         <label for="amount">Amount:</label>
                         <input type="number" class="form-control" id="payment-amount" min="10" max="10000000000" required />
                     </div>
-                    <button type="button" class="btn btn-info" id="submit-payment">add</button>
+                    <button type="button" class="btn btn-info submit-button">add</button>
                 </form>
                 <hr />
                 <div class="responsiveTable" style="overflow-x: auto;">
@@ -139,7 +138,6 @@
                                 <th>Date</th>
                                 <th>Description</th>
                                 <th>Amount</th>
-                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
