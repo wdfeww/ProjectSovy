@@ -3,12 +3,27 @@
 * @description script for controlling form inputs
 */
 
-$(document).ready(function () {
+//$(document).ready(function () {
 
-	(function ($) {
+	//(function ($) {
 		
-		var objects = [];
+		var incomeObjects = [];
+		var paymentObjects = [];
 		var button = $('.submit-button');
+
+		var countIncome = (function () {
+			var count = -1;
+			return function () {
+				return count+=1;
+			}
+		})();
+
+		var countPayment = (function () {
+			var count = -1;
+			return function () {
+				return count+=1;
+			}
+		})();
 
 		var input = {
 
@@ -42,7 +57,8 @@ $(document).ready(function () {
 
 			createObject: function (d, a) {
 				if( input.test(d, a) ) {
-					objects.push({description: d, amount: (input.getTab() == "incomes-tab")?a:-a});
+					if( input.getTab() == "incomes-tab") incomeObjects.push({description: d, amount: (input.getTab() == "incomes-tab")?a:-a});
+					else paymentObjects.push({description: d, amount: (input.getTab() == "incomes-tab")?a:-a});
 					table.addRow(); //if object was successfully created then add row with data from object
 				}
 			}
@@ -70,35 +86,48 @@ $(document).ready(function () {
 			},
 
 			addRow: function () {
-
-				var trClass = (input.getTab()=='incomes-tab')?'bg-success':'bg-danger'; //styling row
-				var row = '<tr class="'+trClass+'"><td>' + table.getDate() + '</td><td>' + objects[objects.length-1].description + '</td><td>' 
-						+ objects[objects.length-1].amount + '</td></tr>';
-
 				if(input.getTab() == "incomes-tab"){
 					var incomesTable = $('#incomes-table tbody');
-					incomesTable.append(row);
-					
+					var row = '<tr class="'+countIncome()+' bg-success"><td>' + table.getDate() + '</td><td>' + 
+							incomeObjects[incomeObjects.length-1].description +  
+							'</td><td>' + incomeObjects[incomeObjects.length-1].amount + '</td><td><img src="images\\x.gif" alt="x"></td></tr>';
+
+					incomesTable.append(row);	
 				}
 				else if(input.getTab() == "payments-tab"){
 					var paymentsTable = $('#payments-table tbody');
+
+					var row = '<tr class="'+countPayment()+' bg-danger"><td>' + table.getDate() + '</td><td>' + 
+							paymentObjects[paymentObjects.length-1].description +
+							'</td><td>' + paymentObjects[paymentObjects.length-1].amount + '</td><td><img src="images\\x.gif" alt="x"></td></tr>';
+
 					paymentsTable.append(row);
-					
 				}
 
+				var turnOverRow = row.substring(0, row.indexOf("<td><img"));
 				var turnoversTable = $('#turnovers-table tbody');
-				turnoversTable.append(row);
-				
-
+				turnoversTable.append(turnOverRow);		
 			},
+
+			deleteRow: function (r) {
+				var index = r.index();
+				var firstClass = r.attr('class').split(' ')[0];
+				var secondClass = r.attr('class').split(' ')[1];
+				if(input.getTab() == "incomes-tab") incomeObjects.splice(index, 1);
+				else paymentObjects.splice(index, 1);
+				$('.'+firstClass+''+'.'+secondClass+'').remove();
+			}
 		};
 
 		var balance = {
 
 			setValue : function () {
 				var sum = 0, i;
-				for (i = 0; i < objects.length; i++) {
-					sum += (objects[i].amount)*100;
+				for (i = 0; i < incomeObjects.length; i++) {
+					sum += (incomeObjects[i].amount)*100;
+				}
+				for(i = 0; i < paymentObjects.length; i++){
+					sum += (paymentObjects[i].amount)*100;
 				}
 				$('#balance-value').text(sum/100);
 			}
@@ -112,7 +141,13 @@ $(document).ready(function () {
 			//balance.style();
 		});
 
-	})(jQuery);
+		$('tbody').on('click', 'img', function () {
+			var row = $(this).parent().parent();
+			table.deleteRow(row);
+			balance.setValue();
+		})
+
+	//})(jQuery);
 
 
-});
+//});
