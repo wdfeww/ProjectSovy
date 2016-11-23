@@ -71,24 +71,22 @@ $(document).ready(function () {
 
 			addRow: function () {
 
-				var row = '<tr><td>' + table.getDate() + '</td><td>' + objects[objects.length-1].description + '</td><td>' 
+				var trClass = (input.getTab()=='incomes-tab')?'bg-success':'bg-danger'; //styling row
+				var row = '<tr class="'+trClass+'"><td>' + table.getDate() + '</td><td>' + objects[objects.length-1].description + '</td><td>' 
 						+ objects[objects.length-1].amount + '</td></tr>';
 
 				if(input.getTab() == "incomes-tab"){
 					var incomesTable = $('#incomes-table tbody');
-					$("tr").addClass("bg-success");
 					incomesTable.append(row);
 					
 				}
 				else if(input.getTab() == "payments-tab"){
 					var paymentsTable = $('#payments-table tbody');
-					$("tr").addClass("bg-danger");
 					paymentsTable.append(row);
 					
 				}
 
 				var turnoversTable = $('#turnovers-table tbody');
-				$("tr").addClass("bg-info");
 				turnoversTable.append(row);
 				
 
