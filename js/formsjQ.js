@@ -139,14 +139,30 @@
 			balance.setValue();
 			
 			//balance.style();
+			var bal = $("#balance-value").text();
+			var bal = parseInt(bal);
+			if(bal>0){
+			$(".balance-value").addClass("success");
+			}
+			else{
+				$(".balance-value").removeClass("success");
+				$(".balance-value").addClass("error");
+			}
+			
+			
+			
+			
 		});
 
 		$('tbody').on('click', 'img', function () {
 			var row = $(this).parent().parent();
 			table.deleteRow(row);
 			balance.setValue();
+	
+		
 		})
-
+		
+		
 	//})(jQuery);
 
 

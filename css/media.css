@@ -158,3 +158,10 @@ th,td{
 #payments-table, #incomes-table, #turnovers-table{
 	table-layout: fixed;
 }
+
+.error{
+	color:#ff5050;
+}
+.success{
+	color:#00cc66;
+}
