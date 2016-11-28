@@ -90,6 +90,7 @@
 			toggleFeedback: function () {
 				if($(".form-group").has("#feedback")){
 					$(".feedback").remove();
+
 					
 				}
 			}
@@ -183,20 +184,18 @@
 		button.on('click', function () {
 
 			input.toggleFeedback();
-
-			
 			if(input.test(input.getDescription(), input.getAmount())){
 				input.inputStyleTrue();
 			}
 			else{
 				input.inputStyleFalse();
-			}
-
-
+			} //gives feedbacks to input fields
 
 			input.createObject(input.getDescription(), input.getAmount());
 			balance.setValue();
 			balance.style();
+
+			$(".form-control").val(" "); // clears input tabs
 			
 			
 			
