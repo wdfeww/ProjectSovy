@@ -25,8 +25,6 @@
 			}
 		})();
 
-
-
 		var input = {
 
 			getTab : function () {
@@ -52,8 +50,6 @@
 				return amount;				
 			},
 
-
-
 			test : function (d, a) {
 				if( d.length>0 && a>=1 && (a*100)%1 == 0 && typeof(a)=='number' && d.indexOf('<')==-1) return true;
 				else return false;
@@ -65,35 +61,7 @@
 					else paymentObjects.push({description: d, amount: (input.getTab() == "incomes-tab")?a:-a});
 					table.addRow(); //if object was successfully created then add row with data from object
 				}
-			},
-
-			
-			inputStyleTrue: function() { 
-				$(".form-group").removeClass("has-error");
-				$(".form-group").addClass("has-success");
-				$(".form-group").removeClass("error");
-				$(".form-group").addClass("success");
-				$(".form-control").addClass("form-control-success");
-				$('<div>Correct input.</div>').attr("class","feedback").appendTo(".form-group");
-				
-			},
-				
-			inputStyleFalse: function() {
-				$(".form-group").removeClass("has-success");
-				$(".form-group").addClass("has-error");
-				$(".form-group").removeClass("success");
-				$(".form-group").addClass("error");
-				$(".form-control").addClass("form-control-error");
-				$('<div>Incorrect input.</div>').attr("class","feedback").appendTo(".form-group");
-			},
-
-			toggleFeedback: function () {
-				if($(".form-group").has("#feedback")){
-					$(".feedback").remove();
-					
-				}
 			}
-		
 		};
 
 		var table = {
@@ -162,50 +130,25 @@
 					sum += (paymentObjects[i].amount)*100;
 				}
 				$('#balance-value').text(sum/100);
-			},
-			
-			style : function () {
-				var bal = $("#balance-value").text();
-				var bal = parseInt(bal);
-				if(bal>0){
-					$(".balance-value").addClass("success");
-					
-				}
-				else{
-					$(".balance-value").removeClass("success");
-					$(".balance-value").addClass("error");
-				}
 			}
-			
-			
+			//style : 
 		};
 
 		button.on('click', function () {
-
-			input.toggleFeedback();
-
-			
-			if(input.test(input.getDescription(), input.getAmount())){
-				input.inputStyleTrue();
-			}
-			else{
-				input.inputStyleFalse();
-			}
-
-
-
 			input.createObject(input.getDescription(), input.getAmount());
 			balance.setValue();
-			balance.style();
 			
+			//balance.style();
+			var bal = $("#balance-value").text();
+			var bal = parseInt(bal);
+			if(bal>0){
+			$(".balance-value").addClass("success");
+			}
+			else{
+				$(".balance-value").removeClass("success");
+				$(".balance-value").addClass("error");
+			}
 			
-			
-			
-			
-			
-
-			
-		
 			
 			
 			
