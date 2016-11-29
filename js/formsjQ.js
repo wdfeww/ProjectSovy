@@ -66,25 +66,21 @@
 					table.addRow(); //if object was successfully created then add row with data from object
 				}
 			},
+				
+			setInputStyleFalse: function() {
 
-			
-			inputStyleTrue: function() { 
-				$(".form-group").removeClass("has-error");
-				$(".form-group").addClass("has-success");
-				$(".form-group").removeClass("error");
-				$(".form-group").addClass("success");
-				$(".form-control").addClass("form-control-success");
-				$('<div>Correct input.</div>').attr("class","feedback").appendTo(".form-group");
+				//add style by ID
+				//#payment-description #payment-amount #income-description #income-amount
 				
-			},
-				
-			inputStyleFalse: function() {
-				$(".form-group").removeClass("has-success");
 				$(".form-group").addClass("has-error");
-				$(".form-group").removeClass("success");
 				$(".form-group").addClass("error");
 				$(".form-control").addClass("form-control-error");
 				$('<div>Incorrect input.</div>').attr("class","feedback").appendTo(".form-group");
+			},
+
+			clearInputStyle: function() {
+				$(".form-group").removeClass("has-error");
+				$(".form-group").removeClass("error");
 			},
 
 			toggleFeedback: function () {
@@ -165,9 +161,9 @@
 				$('#balance-value').text(sum/100);
 			},
 			
-			style : function () {
+			setStyle : function () {
 				var bal = $("#balance-value").text();
-				var bal = parseInt(bal);
+				var bal = parseFloat(bal);
 				if(bal>0){
 					$(".balance-value").addClass("success");
 					
@@ -185,17 +181,17 @@
 
 			input.toggleFeedback();
 			if(input.test(input.getDescription(), input.getAmount())){
-				input.inputStyleTrue();
+				input.clearInputStyle();
 			}
 			else{
-				input.inputStyleFalse();
+				input.setInputStyleFalse();
 			} //gives feedbacks to input fields
 
 			input.createObject(input.getDescription(), input.getAmount());
 			balance.setValue();
-			balance.style();
+			balance.setStyle();
 
-			$(".form-control").val(" "); // clears input tabs
+
 			
 			
 			
