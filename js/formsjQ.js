@@ -45,7 +45,7 @@
 					amount = 'error';
 				}
 				else{
-					if(amount.includes(',')) amount.indexOf(',') = '.';	//this is because when user enters , instead of . then stored number was int
+				    if (amount.includes(',')) amount.replace(/,/g, '.');	//this is because when user enters , instead of . then stored number was int
 					amount = parseFloat(amount);
 				}
 
@@ -55,7 +55,7 @@
 
 
 			test : function (d, a) {
-				if( d.length>0 && a>=1 && (a*100)%1 == 0 && typeof(a)=='number' && d.indexOf('<')==-1) return true;
+			    if (d.length > 0 && a >= 1 && (a * 1000) % 10 == 0 && $.isNumeric(a) && d.indexOf('<') == -1) return true;
 				else return false;
 			},
 
