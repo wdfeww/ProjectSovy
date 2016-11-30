@@ -67,15 +67,108 @@
 				}
 			},
 				
-			setInputStyleFalse: function() {
+			
+			setIncomeStyle: function() {
 
 				//add style by ID
 				//#payment-description #payment-amount #income-description #income-amount
+				var incomeAmount = $("#income-amount").val();
+				var incomeDescription = $("#income-description").val();
+
+				if(incomeDescription.length < 1&&incomeAmount<=0)
+				{
+					$("#incomeDesc").addClass("has-error"); 
+					$("#incomeDesc").addClass("error");
+					$("#incomeDesc").addClass("form-control-error");		
+					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeDesc");
+					//add incomeamount errors here
+					$("#incomeAmount").addClass("has-error"); 
+					$("#incomeAmount").addClass("error");
+					$("#incomeAmount").addClass("form-control-error");
+					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeAmount");
+
+				}
+				else{
+					if(incomeDescription.length>0&&incomeAmount<=0)
+					{
+					$("#incomeDesc").removeClass("has-error"); 
+					$("#incomeDesc").removeClass("error");
+					$("#incomeDesc").removeClass("form-control-error");		
+					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeDesc");
+					//obsolete classes removed
+					$("#incomeAmount").addClass("has-error"); 
+					$("#incomeAmount").addClass("error");
+					$("#incomeAmount").addClass("form-control-error");		
+					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeAmount");
+					}
+					else{
+						if(incomeDescription.length<1&&incomeAmount>0)
+						{
+						$("#incomeAmount").removeClass("has-error"); 
+						$("#incomeAmount").removeClass("error");
+						$("#incomeAmount").removeClass("form-control-error");		
+						$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeAmount");
+					//removing finished
+						$("#incomeDesc").addClass("has-error"); 
+						$("#incomeDesc").addClass("error");
+						$("#incomeDesc").addClass("form-control-error");		
+						$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeDesc");
+						}
+					}
+				}
+			
+			},
+
+			setPaymentStyle: function() {
+				var paymentAmount = $("#payment-amount").val();
+				var paymentDescription = $("#payment-description").val();
+
+
+				if(paymentDescription.length < 1&&paymentAmount<=0)
+				{
+					$("#paymentDesc").addClass("has-error"); 
+					$("#paymentDesc").addClass("error");
+					$("#paymentDesc").addClass("form-control-error");		
+					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentDesc");
+					//add incomeamount errors here
+					$("#paymentAmount").addClass("has-error"); 
+					$("#paymentAmount").addClass("error");
+					$("#paymentAmount").addClass("form-control-error");
+					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentAmount");
+
+				}
+				else{
+					if(paymentDescription.length>0&&paymentAmount<=0)
+					{
+					$("#paymentDesc").removeClass("has-error"); 
+					$("#paymentDesc").removeClass("error");
+					$("#paymentDesc").removeClass("form-control-error");		
+					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentDesc");
+					//obsolete classes removed
+					$("#paymentAmount").addClass("has-error"); 
+					$("#paymentAmount").addClass("error");
+					$("#paymentAmount").addClass("form-control-error");		
+					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentAmount");
+					}
+					else{
+						if(paymentDescription.length<1&&paymentAmount>0)
+						{
+						$("#paymentAmount").removeClass("has-error"); 
+						$("#paymentAmount").removeClass("error");
+						$("#paymentAmount").removeClass("form-control-error");		
+						$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentAmount");
+					//removing finished
+						$("#paymentDesc").addClass("has-error"); 
+						$("#paymentDesc").addClass("error");
+						$("#paymentDesc").addClass("form-control-error");		
+						$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentDesc");
+						}
+					}
+				}
+
 				
-				$(".form-group").addClass("has-error");
-				$(".form-group").addClass("error");
-				$(".form-control").addClass("form-control-error");
-				$('<div>Incorrect input.</div>').attr("class","feedback").appendTo(".form-group");
+				
+			
 			},
 
 			clearInputStyle: function() {
@@ -84,7 +177,7 @@
 			},
 
 			toggleFeedback: function () {
-				if($(".form-group").has("#feedback")){
+				if($(".form-group").has(".feedback")){
 					$(".feedback").remove();
 
 					
@@ -184,8 +277,13 @@
 				input.clearInputStyle();
 			}
 			else{
-				input.setInputStyleFalse();
-			} //gives feedbacks to input fields
+				if(input.getTab() == "incomes-tab")
+				input.setIncomeStyle();
+				else{
+					input.setPaymentStyle();
+				}
+
+			} //gives feedbacks to input fields 
 
 			input.createObject(input.getDescription(), input.getAmount());
 			balance.setValue();
