@@ -77,40 +77,32 @@
 
 				if(incomeDescription.length < 1&&incomeAmount<=0)
 				{
-					$("#incomeDesc").addClass("has-error"); 
-					$("#incomeDesc").addClass("error");
-					$("#incomeDesc").addClass("form-control-error");		
-					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeDesc");
+					$("#incomeDesc").addClass("has-error form-control-error"); 		
+					$('<div>Incorrect input.</div>').attr("id","feedback").appendTo("#incomeDesc");
+					$("#feedback").addClass("error");
 					//add incomeamount errors here
-					$("#incomeAmount").addClass("has-error"); 
-					$("#incomeAmount").addClass("error");
-					$("#incomeAmount").addClass("form-control-error");
-					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeAmount");
+					$("#incomeAmount").addClass("has-error form-control-error"); 
+					$('<div>Incorrect input.</div>').attr("id","feedback2").appendTo("#incomeAmount");
+					$("#feedback2").addClass("error");
 
 				}
 				else{
 					if(incomeDescription.length>0&&incomeAmount<=0)
 					{
-					$("#incomeDesc").removeClass("has-error"); 
-					$("#incomeDesc").removeClass("error");
-					$("#incomeDesc").removeClass("form-control-error");		
+					$("#incomeDesc").removeClass("has-error form-control-error"); 
 					//obsolete classes removed
-					$("#incomeAmount").addClass("has-error"); 
-					$("#incomeAmount").addClass("error");
-					$("#incomeAmount").addClass("form-control-error");		
-					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeAmount");
+					$("#incomeAmount").addClass("has-error form-control-error"); 	
+					$('<div>Incorrect input.</div>').attr("id","feedback2").appendTo("#incomeAmount");
+					$("#feedback2").addClass("error");
 					}
 					else{
 						if(incomeDescription.length<1&&incomeAmount>0)
 						{
-						$("#incomeAmount").removeClass("has-error"); 
-						$("#incomeAmount").removeClass("error");
-						$("#incomeAmount").removeClass("form-control-error");		
+						$("#incomeAmount").removeClass("has-error form-control-error"); 	
 						//removing finished
-						$("#incomeDesc").addClass("has-error"); 
-						$("#incomeDesc").addClass("error");
-						$("#incomeDesc").addClass("form-control-error");		
-						$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeDesc");
+						$("#incomeDesc").addClass("has-error form-control-error"); 		
+						$('<div>Incorrect input.</div>').attr("id","feedback").appendTo("#incomeDesc");
+						$("#feedback").addClass("error");
 						}
 					}
 				}
@@ -124,40 +116,32 @@
 
 				if(paymentDescription.length < 1&&paymentAmount<=0)
 				{
-					$("#paymentDesc").removeClass("has-error"); 
-					$("#paymentDesc").removeClass("error");
-					$("#paymentDesc").removeClass("form-control-error");	
-					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentDesc");	
+					$("#paymentDesc").addClass("has-error form-control-error"); 
+					$('<div>Incorrect input.</div>').attr("id","feedback3").appendTo("#paymentDesc");
+					$("#feedback3").addClass("error");	
 					//add incomeamount errors here
-					$("#paymentAmount").addClass("has-error"); 
-					$("#paymentAmount").addClass("error");
-					$("#paymentAmount").addClass("form-control-error");
-					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentAmount");
+					$("#paymentAmount").addClass("has-error form-control-error"); 
+					$('<div>Incorrect input.</div>').attr("id","feedback4").appendTo("#paymentAmount");
+					$("#feedback4").addClass("error");
 
 				}
 				else{
 					if(paymentDescription.length>0&&paymentAmount<=0)
 					{
-					$("#paymentDesc").removeClass("has-error"); 
-					$("#paymentDesc").removeClass("error");
-					$("#paymentDesc").removeClass("form-control-error");		
+					$("#paymentDesc").removeClass("has-error form-control-error"); 	
 					//obsolete classes removed
-					$("#paymentAmount").addClass("has-error"); 
-					$("#paymentAmount").addClass("error");
-					$("#paymentAmount").addClass("form-control-error");		
-					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentAmount");
+					$("#paymentAmount").addClass("has-error form-control-error"); 
+					$('<div>Incorrect input.</div>').attr("id","feedback4").appendTo("#paymentAmount");
+					$("#feedback4").addClass("error");
 					}
 					else{
 						if(paymentDescription.length<1&&paymentAmount>0)
 						{
-						$("#paymentAmount").removeClass("has-error"); 
-						$("#paymentAmount").removeClass("error");
-						$("#paymentAmount").removeClass("form-control-error");		
+						$("#paymentAmount").removeClass("has-error form-control-error"); 	
 						//removing finished
-						$("#paymentDesc").addClass("has-error"); 
-						$("#paymentDesc").addClass("error");
-						$("#paymentDesc").addClass("form-control-error");		
-						$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentDesc");
+						$("#paymentDesc").addClass("has-error form-control-error"); 	
+						$('<div>Incorrect input.</div>').attr("id","feedback3").appendTo("#paymentDesc");
+						$("#feedback3").addClass("error");
 						}
 					}
 				}
@@ -168,15 +152,21 @@
 			},
 
 			clearInputStyle: function() {
-				$(".form-group").removeClass("has-error");
-				$(".form-group").removeClass("error");
+				$(".form-group").removeClass("has-error error");
 			},
 
 			toggleFeedback: function () {
-				if($(".form-group").has(".feedback")){
-					$(".feedback").remove();
-
-					
+				if($("#incomeAmount").has("#feedback")){
+					$("#feedback").remove();
+				}
+				if($("#incomeDesc").has("#feedback2")){
+					$("#feedback2").remove();
+				}
+				if($("#paymentAmount").has("#feedback3")){
+					$("#feedback3").remove();
+				}
+				if($("#paymentDesc").has("#feedback4")){
+					$("#feedback4").remove();
 				}
 			}
 		
