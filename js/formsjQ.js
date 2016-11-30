@@ -77,10 +77,9 @@
 
 				if(incomeDescription.length < 1&&incomeAmount<=0)
 				{
-					$("#incomeDesc").addClass("has-error"); 
-					$("#incomeDesc").addClass("error");
-					$("#incomeDesc").addClass("form-control-error");		
-					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeDesc");
+					$("#incomeDesc").removeClass("has-error"); 
+					$("#incomeDesc").removeClass("error");
+					$("#incomeDesc").removeClass("form-control-error");		
 					//add incomeamount errors here
 					$("#incomeAmount").addClass("has-error"); 
 					$("#incomeAmount").addClass("error");
@@ -94,7 +93,6 @@
 					$("#incomeDesc").removeClass("has-error"); 
 					$("#incomeDesc").removeClass("error");
 					$("#incomeDesc").removeClass("form-control-error");		
-					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeDesc");
 					//obsolete classes removed
 					$("#incomeAmount").addClass("has-error"); 
 					$("#incomeAmount").addClass("error");
@@ -107,8 +105,7 @@
 						$("#incomeAmount").removeClass("has-error"); 
 						$("#incomeAmount").removeClass("error");
 						$("#incomeAmount").removeClass("form-control-error");		
-						$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeAmount");
-					//removing finished
+						//removing finished
 						$("#incomeDesc").addClass("has-error"); 
 						$("#incomeDesc").addClass("error");
 						$("#incomeDesc").addClass("form-control-error");		
@@ -126,10 +123,9 @@
 
 				if(paymentDescription.length < 1&&paymentAmount<=0)
 				{
-					$("#paymentDesc").addClass("has-error"); 
-					$("#paymentDesc").addClass("error");
-					$("#paymentDesc").addClass("form-control-error");		
-					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentDesc");
+					$("#paymentDesc").removeClass("has-error"); 
+					$("#paymentDesc").removeClass("error");
+					$("#paymentDesc").removeClass("form-control-error");		
 					//add incomeamount errors here
 					$("#paymentAmount").addClass("has-error"); 
 					$("#paymentAmount").addClass("error");
@@ -143,7 +139,6 @@
 					$("#paymentDesc").removeClass("has-error"); 
 					$("#paymentDesc").removeClass("error");
 					$("#paymentDesc").removeClass("form-control-error");		
-					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentDesc");
 					//obsolete classes removed
 					$("#paymentAmount").addClass("has-error"); 
 					$("#paymentAmount").addClass("error");
@@ -156,8 +151,7 @@
 						$("#paymentAmount").removeClass("has-error"); 
 						$("#paymentAmount").removeClass("error");
 						$("#paymentAmount").removeClass("form-control-error");		
-						$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentAmount");
-					//removing finished
+						//removing finished
 						$("#paymentDesc").addClass("has-error"); 
 						$("#paymentDesc").addClass("error");
 						$("#paymentDesc").addClass("form-control-error");		
