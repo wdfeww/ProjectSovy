@@ -25,8 +25,6 @@
 			}
 		})();
 
-
-
 		var input = {
 
 			getTab : function () {
@@ -45,17 +43,15 @@
 					amount = 'error';
 				}
 				else{
-				    if (amount.includes(',')) amount.replace(/,/g, '.');	//this is because when user enters , instead of . then stored number was int
+					if(amount.includes(',')) amount.indexOf(',') = '.';	//this is because when user enters , instead of . then stored number was int
 					amount = parseFloat(amount);
 				}
 
 				return amount;				
 			},
 
-
-
 			test : function (d, a) {
-			    if (d.length > 0 && a >= 1 && (a * 1000) % 10 == 0 && $.isNumeric(a) && d.indexOf('<') == -1) return true;
+				if( d.length>0 && a>=1 && (a*100)%1 == 0 && typeof(a)=='number' && d.indexOf('<')==-1) return true;
 				else return false;
 			},
 
@@ -65,111 +61,7 @@
 					else paymentObjects.push({description: d, amount: (input.getTab() == "incomes-tab")?a:-a});
 					table.addRow(); //if object was successfully created then add row with data from object
 				}
-			},
-				
-			
-			setIncomeStyle: function() {
-
-				//add style by ID
-				//#payment-description #payment-amount #income-description #income-amount
-				var incomeAmount = $("#income-amount").val();
-				var incomeDescription = $("#income-description").val();
-
-				if(incomeDescription.length < 1&&incomeAmount<=0)
-				{
-					$("#incomeDesc").addClass("has-error form-control-error"); 		
-					$('<div>Incorrect input.</div>').attr("id","feedback").appendTo("#incomeDesc");
-					$("#feedback").addClass("error");
-					//add incomeamount errors here
-					$("#incomeAmount").addClass("has-error form-control-error"); 
-					$('<div>Incorrect input.</div>').attr("id","feedback2").appendTo("#incomeAmount");
-					$("#feedback2").addClass("error");
-
-				}
-				else{
-					if(incomeDescription.length>0&&incomeAmount<=0)
-					{
-					$("#incomeDesc").removeClass("has-error form-control-error"); 
-					//obsolete classes removed
-					$("#incomeAmount").addClass("has-error form-control-error"); 	
-					$('<div>Incorrect input.</div>').attr("id","feedback2").appendTo("#incomeAmount");
-					$("#feedback2").addClass("error");
-					}
-					else{
-						if(incomeDescription.length<1&&incomeAmount>0)
-						{
-						$("#incomeAmount").removeClass("has-error form-control-error"); 	
-						//removing finished
-						$("#incomeDesc").addClass("has-error form-control-error"); 		
-						$('<div>Incorrect input.</div>').attr("id","feedback").appendTo("#incomeDesc");
-						$("#feedback").addClass("error");
-						}
-					}
-				}
-			
-			},
-
-			setPaymentStyle: function() {
-				var paymentAmount = $("#payment-amount").val();
-				var paymentDescription = $("#payment-description").val();
-
-
-				if(paymentDescription.length < 1&&paymentAmount<=0)
-				{
-					$("#paymentDesc").addClass("has-error form-control-error"); 
-					$('<div>Incorrect input.</div>').attr("id","feedback3").appendTo("#paymentDesc");
-					$("#feedback3").addClass("error");	
-					//add incomeamount errors here
-					$("#paymentAmount").addClass("has-error form-control-error"); 
-					$('<div>Incorrect input.</div>').attr("id","feedback4").appendTo("#paymentAmount");
-					$("#feedback4").addClass("error");
-
-				}
-				else{
-					if(paymentDescription.length>0&&paymentAmount<=0)
-					{
-					$("#paymentDesc").removeClass("has-error form-control-error"); 	
-					//obsolete classes removed
-					$("#paymentAmount").addClass("has-error form-control-error"); 
-					$('<div>Incorrect input.</div>').attr("id","feedback4").appendTo("#paymentAmount");
-					$("#feedback4").addClass("error");
-					}
-					else{
-						if(paymentDescription.length<1&&paymentAmount>0)
-						{
-						$("#paymentAmount").removeClass("has-error form-control-error"); 	
-						//removing finished
-						$("#paymentDesc").addClass("has-error form-control-error"); 	
-						$('<div>Incorrect input.</div>').attr("id","feedback3").appendTo("#paymentDesc");
-						$("#feedback3").addClass("error");
-						}
-					}
-				}
-
-				
-				
-			
-			},
-
-			clearInputStyle: function() {
-				$(".form-group").removeClass("has-error error");
-			},
-
-			toggleFeedback: function () {
-				if($("#incomeAmount").has("#feedback")){
-					$("#feedback").remove();
-				}
-				if($("#incomeDesc").has("#feedback2")){
-					$("#feedback2").remove();
-				}
-				if($("#paymentAmount").has("#feedback3")){
-					$("#feedback3").remove();
-				}
-				if($("#paymentDesc").has("#feedback4")){
-					$("#feedback4").remove();
-				}
 			}
-		
 		};
 
 		var table = {
@@ -238,53 +130,25 @@
 					sum += (paymentObjects[i].amount)*100;
 				}
 				$('#balance-value').text(sum/100);
-			},
-			
-			setStyle : function () {
-				var bal = $("#balance-value").text();
-				var bal = parseFloat(bal);
-				if(bal>0){
-					$(".balance-value").addClass("success");
-					
-				}
-				else{
-					$(".balance-value").removeClass("success");
-					$(".balance-value").addClass("error");
-				}
 			}
-			
-			
+			//style : 
 		};
 
 		button.on('click', function () {
-
-			input.toggleFeedback();
-			if(input.test(input.getDescription(), input.getAmount())){
-				input.clearInputStyle();
-			}
-			else{
-				if(input.getTab() == "incomes-tab")
-				input.setIncomeStyle();
-				else{
-					input.setPaymentStyle();
-				}
-
-			} //gives feedbacks to input fields 
-
 			input.createObject(input.getDescription(), input.getAmount());
 			balance.setValue();
-			balance.setStyle();
-
-
 			
+			//balance.style();
+			var bal = $("#balance-value").text();
+			var bal = parseInt(bal);
+			if(bal>0){
+			$(".balance-value").addClass("success");
+			}
+			else{
+				$(".balance-value").removeClass("success");
+				$(".balance-value").addClass("error");
+			}
 			
-			
-			
-			
-			
-
-			
-		
 			
 			
 			
