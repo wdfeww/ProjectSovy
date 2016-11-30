@@ -77,9 +77,10 @@
 
 				if(incomeDescription.length < 1&&incomeAmount<=0)
 				{
-					$("#incomeDesc").removeClass("has-error"); 
-					$("#incomeDesc").removeClass("error");
-					$("#incomeDesc").removeClass("form-control-error");		
+					$("#incomeDesc").addClass("has-error"); 
+					$("#incomeDesc").addClass("error");
+					$("#incomeDesc").addClass("form-control-error");		
+					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#incomeDesc");
 					//add incomeamount errors here
 					$("#incomeAmount").addClass("has-error"); 
 					$("#incomeAmount").addClass("error");
@@ -125,7 +126,8 @@
 				{
 					$("#paymentDesc").removeClass("has-error"); 
 					$("#paymentDesc").removeClass("error");
-					$("#paymentDesc").removeClass("form-control-error");		
+					$("#paymentDesc").removeClass("form-control-error");	
+					$('<div>Incorrect input.</div>').attr("class","feedback").appendTo("#paymentDesc");	
 					//add incomeamount errors here
 					$("#paymentAmount").addClass("has-error"); 
 					$("#paymentAmount").addClass("error");
