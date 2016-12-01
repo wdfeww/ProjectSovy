@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -14,7 +14,7 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <script src="js/EC.js"></script>
 </head>
-<body>
+<body  ondragstart="return false;" ondrop="return false;">
     <!--navigation-->
     <header>
         <div class="page-header">
@@ -110,11 +110,11 @@
             <div id="incomes" class="tab-pane fade in">
                 <h3>Add income</h3>
                 <form id="incomes-form">
-                    <div class="form-group">
+                    <div class="form-group"  id="incomeDesc">
                         <label for="description">Description:</label>
                         <input type="text" class="form-control" id="income-description" pattern=".{1,}" required />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="incomeAmount">
                         <label for="amount">Amount:</label>
                         <input type="number" class="form-control" id="income-amount" required />
                     </div>
@@ -142,11 +142,11 @@
             <div id="payments" class="tab-pane fade in">
                 <h3>Add Payment</h3>
                 <form id="payments-form">
-                    <div class="form-group">
+                    <div class="form-group" id="paymentDesc">
                         <label for="description">Description:</label>
                         <input type="text" class="form-control" id="payment-description" pattern=".{1,}" required />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="paymentAmount">
                         <label for="amount">Amount:</label>
                         <input type="number" class="form-control" id="payment-amount" min="10" max="10000000000" required />
                     </div>
