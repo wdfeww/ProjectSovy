@@ -10,6 +10,9 @@
 		var incomeObjects = [];
 		var paymentObjects = [];
 		var button = $('.submit-button');
+		var incomesTable = $('#incomes-table').initTable({cols : ['Date', 'Description', 'Amount', 'Delete']});
+		var paymentsTable = $('#payments-table').initTable({cols : ['Date', 'Description', 'Amount', 'Delete']});
+		var turnoversTable = $('#turnovers-table').initTable({cols : ['Date', 'Description', 'Amount']});
 
 		var countIncome = (function () {
 			var count = -1;
@@ -57,9 +60,22 @@
 
 			createObject: function (d, a) {
 				if( input.test(d, a) ) {
-					if( input.getTab() == "incomes-tab") incomeObjects.push({description: d, amount: (input.getTab() == "incomes-tab")?a:-a});
-					else paymentObjects.push({description: d, amount: (input.getTab() == "incomes-tab")?a:-a});
-					table.addRow(); //if object was successfully created then add row with data from object
+					if( input.getTab() == "incomes-tab"){
+						var rowClass = 'i'+countIncome();
+						incomeObjects.push({description: d, amount: a});
+						incomesTable.addRow([true, incomeObjects[incomeObjects.length-1].description, 
+											incomeObjects[incomeObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowClass);
+						turnoversTable.addRow([true, incomeObjects[incomeObjects.length-1].description, 
+											incomeObjects[incomeObjects.length-1].amount], rowClass);
+					}
+					else {
+						var rowClass = 'p'+countPayment();
+						paymentObjects.push({description: d, amount: -a});
+						paymentsTable.addRow([true, paymentObjects[paymentObjects.length-1].description, 
+											paymentObjects[paymentObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowClass);
+						turnoversTable.addRow([true, paymentObjects[paymentObjects.length-1].description, 
+											paymentObjects[paymentObjects.length-1].amount], rowClass);
+					}
 				}
 			},
 
@@ -135,10 +151,6 @@
 			            }
 			        }
 			    }
-
-
-
-
 			},
 
 			clearInputStyle: function () {
@@ -160,61 +172,6 @@
 			    }
 			}
 
-		};
-
-		var table = {
-
-			getDate: function () {
-				var y = new Date();
-			    var m = new Date();
-			    var d = new Date();
-			    var h = new Date();
-			    var min = new Date();
-			    var zero;
-			    
-			    y = y.getUTCFullYear();
-			    m = m.getUTCMonth() + 1;
-			    d = d.getUTCDate();
-			    h = h.getUTCHours() + 1;
-			    min = ((parseInt(min.getUTCMinutes()) < 10) ? '0' : '') + min.getUTCMinutes();
-
-			    
-			    var dateString = d + "." + m +"." + y + " " + h + ":" + min;
-    			return dateString;
-			},
-
-			addRow: function () {
-				if(input.getTab() == "incomes-tab"){
-					var incomesTable = $('#incomes-table tbody');
-					var row = '<tr class="'+countIncome()+' bg-success"><td>' + table.getDate() + '</td><td>' + 
-							incomeObjects[incomeObjects.length-1].description +  
-							'</td><td>' + incomeObjects[incomeObjects.length-1].amount + '</td><td><img src="images\\x.gif" alt="x"></td></tr>';
-
-					incomesTable.append(row);	
-				}
-				else if(input.getTab() == "payments-tab"){
-					var paymentsTable = $('#payments-table tbody');
-
-					var row = '<tr class="'+countPayment()+' bg-danger"><td>' + table.getDate() + '</td><td>' + 
-							paymentObjects[paymentObjects.length-1].description +
-							'</td><td>' + paymentObjects[paymentObjects.length-1].amount + '</td><td><img src="images\\x.gif" alt="x"></td></tr>';
-
-					paymentsTable.append(row);
-				}
-
-				var turnOverRow = row.substring(0, row.indexOf("<td><img"));
-				var turnoversTable = $('#turnovers-table tbody');
-				turnoversTable.append(turnOverRow);		
-			},
-
-			deleteRow: function (r) {
-				var index = r.index();
-				var firstClass = r.attr('class').split(' ')[0];
-				var secondClass = r.attr('class').split(' ')[1];
-				if(input.getTab() == "incomes-tab") incomeObjects.splice(index, 1);
-				else paymentObjects.splice(index, 1);
-				$('.'+firstClass+''+'.'+secondClass+'').remove();
-			}
 		};
 
 		var balance = {
@@ -258,19 +215,28 @@
 		        }
 
 		    } //gives feedbacks to input fields 
-
 		    input.createObject(input.getDescription(), input.getAmount());
 		    balance.setValue();
 		    balance.setStyle();
 		});
 
-		$('tbody').on('click', 'img', function () {
-			var row = $(this).parent().parent();
-			table.deleteRow(row);
+		incomesTable.on('click', 'img', function () {
+			var index = $(this).parent().parent().index();
+			var rowIndex = $(this).parent().parent().attr('class');
+			incomesTable.deleteRow(rowIndex);
+			turnoversTable.deleteRow(rowIndex);
+			incomeObjects.splice(index, 1);
 			balance.setValue();
-	
-		
-		})
+		});
+
+		paymentsTable.on('click', 'img', function () {
+			var index = $(this).parent().parent().index();
+			var rowIndex = $(this).parent().parent().attr('class');
+			paymentsTable.deleteRow(rowIndex);
+			turnoversTable.deleteRow(rowIndex);
+			paymentObjects.splice(index, 1);
+			balance.setValue();
+		});
 		
 		
 	//})(jQuery);
