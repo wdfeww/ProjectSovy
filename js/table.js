@@ -44,9 +44,9 @@
 			selector.append(table);
 		}
 
-		selector.addRow = function (rowData, rowClass) {
+		selector.addRow = function (rowData, rowClass, rowColor) {
 			setCol(rowData);
-			var row = $('<tr></tr>').addClass(rowClass);
+			var row = $('<tr></tr>').addClass(rowClass).css('background-color', rowColor);
 			for(var i = 0, length1 = rowData.length; i < length1; i++){
 				var col = $('<td/>');
 				col = col.append(rowData[i]);

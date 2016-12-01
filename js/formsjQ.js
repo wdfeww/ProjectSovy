@@ -74,17 +74,17 @@
 						var rowClass = 'i'+countIncome();
 						incomeObjects.push({description: d, amount: a});
 						incomesTable.addRow([true, incomeObjects[incomeObjects.length-1].description, 
-											incomeObjects[incomeObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowClass);
+											incomeObjects[incomeObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowClass, '#00cc66');
 						turnoversTable.addRow([true, incomeObjects[incomeObjects.length-1].description, 
-											incomeObjects[incomeObjects.length-1].amount], rowClass);
+											incomeObjects[incomeObjects.length-1].amount], rowClass, '#00cc66');
 					}
 					else {
 						var rowClass = 'p'+countPayment();
 						paymentObjects.push({description: d, amount: -a});
 						paymentsTable.addRow([true, paymentObjects[paymentObjects.length-1].description, 
-											paymentObjects[paymentObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowClass);
+											paymentObjects[paymentObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowClass, '#ff5050');
 						turnoversTable.addRow([true, paymentObjects[paymentObjects.length-1].description, 
-											paymentObjects[paymentObjects.length-1].amount], rowClass);
+											paymentObjects[paymentObjects.length-1].amount], rowClass, '#ff5050');
 					}
 				}
 			},
