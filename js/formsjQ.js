@@ -46,15 +46,15 @@
 					amount = 'error';
 				}
 				else{
-					if(amount.includes(',')) amount.indexOf(',') = '.';	//this is because when user enters , instead of . then stored number was int
+				    if (amount.includes(',')) amount.replace(/,/g, '.');	//this is because when user enters , instead of . then stored number was int
 					amount = parseFloat(amount);
 				}
 
 				return amount;				
 			},
-
-		/*	test : function (d, a) {
-				if( d.length>0 && a>=1 && (a*100)%1 == 0 && typeof(a)=='number' && d.indexOf('<')==-1) return true;
+/*
+			test : function (d, a) {
+			    if (d.length > 0 && a >= 1 && ((a * 1000) % 10) == 0 && $.isNumeric(a) && d.indexOf('<') == -1) return true;
 				else return false;
 			}, */
 
@@ -64,7 +64,7 @@
 			},
 
 			testAmount : function (a) {
-				if(a>=1 && (a*100)%1 == 0 && typeof(a)=='number') return true;
+			    if (a >= 1 && ((a * 1000) % 10) == 0 && $.isNumeric(a)) return true;
 				else return false;
 			},
 
@@ -198,7 +198,7 @@
 				for(i = 0; i < paymentObjects.length; i++){
 					sum += (paymentObjects[i].amount)*100;
 				}
-				$('#balance-value').text(sum/100);
+				$('#balance-value').text((sum / 100).toFixed(2));
 			},
 
 			setStyle: function () {
