@@ -42,7 +42,7 @@ $(document).ready(function () {
 
 			getAmount : function () {
 				var amount = (input.getTab() == "incomes-tab") ? $('#income-amount').val() : $('#payment-amount').val();
-				if(amount.indexOf('e') != -1){ 
+				if (amount.indexOf('e') != -1 || amount.indexOf('E') != -1) {
 					amount = 'error';
 				}
 				else{
