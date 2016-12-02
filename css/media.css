@@ -166,24 +166,18 @@ th,td{
 	color:#00cc66;
 }
 
-/* CSS Document Start of Carousel*/
 .carousel-inner > .item > img,
-.carousel-inner > .item > a > img
-{
-    width: 80%;
-    margin: auto;
+  .carousel-inner > .item > a > img {
+      width: 60%;
+      margin: auto;
+     
+   }
+
+#sovyCarousel{
+	background-color: transparent;
+
 }
 
-.size{
-  width:100%;
-  height: auto;
-  padding: 25px;
-  margin: 50px;
-  
+.navbar-inverse{
+	z-index: 1000;
 }
-
-.carousel{
-        width:740px;
-        height:auto;
-}
- /* CSS Document End of Carousel*/
