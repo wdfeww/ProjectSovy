@@ -1,3 +1,5 @@
+$(document).ready(function () {
+    (function ($) {
 function collapseNav() {
     document.getElementById("my_navbar").className = "navbar-collapse collapse";
 }
@@ -9,3 +11,7 @@ function activateHome() {
         document.getElementById("my_navbar").getElementsByTagName('li')[i].className = "";
     }
 }
+
+    })(jQuery);
+
+});

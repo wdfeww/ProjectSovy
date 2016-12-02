@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    (function ($) {
     var convert = function () {
         var output = $("#calculated");
         var currenclyType = { usd: 1.08887, gbp: 0.87344, aud: 1.43688, czk: 27.0220, cad: 1.46707, chf: 1.07414 };
@@ -16,5 +17,7 @@ $(document).ready(function () {
       }
     $("#eurInput").on("keyup", convert);
     $("input[name=curren]:radio").on("click", convert);
+    		
+})(jQuery);
 
 });

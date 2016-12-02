@@ -1,3 +1,4 @@
+$(document).ready(function () {
 (function ($) {
 	$.fn.initTable = function (options) {
 		var selector = this;
@@ -74,3 +75,5 @@
 		return selector;
 	}
 })(jQuery);
+
+});
