@@ -3,9 +3,9 @@
 * @description script for controlling form inputs
 */
 
-//$(document).ready(function () {
+$(document).ready(function () {
 
-	//(function ($) {
+	(function ($) {
 		
 		var incomeObjects = [];
 		var paymentObjects = [];
@@ -249,7 +249,7 @@
 		});
 		
 		
-	//})(jQuery);
+})(jQuery);
 
 
-//});
+});
