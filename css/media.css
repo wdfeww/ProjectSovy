@@ -155,7 +155,7 @@ th,td{
 	word-wrap: break-word;
 }
 
-#payments-table, #incomes-table, #turnovers-table{
+table{
 	table-layout: fixed;
 }
 
