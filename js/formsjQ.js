@@ -213,7 +213,9 @@ $(document).ready(function () {
 		    input.createObject(input.getDescription(), input.getAmount());
 		    balance.setValue();
 		    balance.setStyle();
+			$("input").val(" ");
 		});
+		
 
 		incomesTable.on('click', 'img', function () {
 			var index = $(this).parent().parent().index();
