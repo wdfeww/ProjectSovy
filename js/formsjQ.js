@@ -6,7 +6,9 @@
 $(document).ready(function () {
 
 	(function ($) {
-		
+
+		$("#calc").euroCalculator();
+
 		var incomeObjects = [];
 		var paymentObjects = [];
 		var data = [];

@@ -1,22 +1,24 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/media.css" />
-    <link rel="stylesheet" type="text/css" href="css/EC.css">  
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Sovy Banking</title>
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
-    <script src="js/EC.js"></script>
     <script src="js/table.js"></script>
     <script src="js/formsjQ.js"></script>
+    <script type="text/javascript" src="js/EuroCalculator.js"></script>
+    <link rel="stylesheet" href="css/EuroCalculator.css">
 </head>
-<body  ondragstart="return false;" ondrop="return false;">
+
+<body ondragstart="return false;" ondrop="return false;">
     <!--navigation-->
     <header>
         <div class="page-header">
@@ -32,11 +34,11 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" id="sovyNavImg" href="#home" data-toggle="tab" onclick="activateHome()">
-					<div id="wink">
-					<img src="images/owl_head_wink.png" height="30px" class="owlhead-bottom"/>
-					<img src="images/owl_head.png" alt="put owl here" height="30px" class="owlhead-top"/>
-					</div>
-					</a>
+                        <div id="wink">
+                            <img src="images/owl_head_wink.png" height="30px" class="owlhead-bottom" />
+                            <img src="images/owl_head.png" alt="put owl here" height="30px" class="owlhead-top" />
+                        </div>
+                    </a>
                 </div>
                 <div class="collapse navbar-collapse" id="my-navbar">
                     <ul class="nav navbar-nav">
@@ -56,35 +58,36 @@
         </nav>
     </header>
     <!--end navigation-->
-     <div class="container">
-        <p align="right" id="acc-balance" class="balance">Account Balance<br /><span class="balance-value" id="balance-value">0.00</span></p>
-    <!--tab content-->
+    <div class="container">
+        <p align="right" id="acc-balance" class="balance">Account Balance
+            <br /><span class="balance-value" id="balance-value">0.00</span></p>
+        <!--tab content-->
         <div class="tab-content">
-         <!--HOME-->
-            <div id="home" class="tab-pane fade in active size" > 
-            <!--Carousel-->
+            <!--HOME-->
+            <div id="home" class="tab-pane fade in active size">
+                <!--Carousel-->
                 <div class="container" id="sovyCarousel">
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
+                        <!-- Indicators -->
                         <ol class="carousel-indicators">
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                             <li data-target="#myCarousel" data-slide-to="1"></li>
                             <li data-target="#myCarousel" data-slide-to="2"></li>
                             <li data-target="#myCarousel" data-slide-to="3"></li>
                         </ol>
-                            <!-- Wrapper for slides -->
+                        <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
 
                             <div class="item active">
-                              <img src="images/Carousel/1.png">
+                                <img src="images/Carousel/1.png">
                             </div>
 
                             <div class="item">
-                              <img src="images/Carousel/2.png">
+                                <img src="images/Carousel/2.png">
                             </div>
-                            
+
                             <div class="item">
-                              <img src="images/Carousel/3.png">
+                                <img src="images/Carousel/3.png">
                             </div>
 
                             <div class="item">
@@ -93,22 +96,22 @@
                         </div>
                     </div>
                 </div>
-            <!-- END Carousel-->
-            </div> 
-         <!--END HOME-->
-         <!--turnovers-->
+                <!-- END Carousel-->
+            </div>
+            <!--END HOME-->
+            <!--turnovers-->
             <div id="turnovers" class="tab-pane fade in">
                 <h3>Turnovers</h3>
                 <div class="responsiveTable" id="turnovers-table">
-                	<!--here will be created table-->
+                    <!--here will be created table-->
                 </div>
             </div>
-         <!--END turnovers-->
-         <!--INCOMES-->
+            <!--END turnovers-->
+            <!--INCOMES-->
             <div id="incomes" class="tab-pane fade in">
                 <h3>Add income</h3>
                 <form id="incomes-form">
-                    <div class="form-group"  id="incomeDesc">
+                    <div class="form-group" id="incomeDesc">
                         <label for="description">Description:</label>
                         <input type="text" class="form-control" id="income-description" pattern=".{1,}" required />
                     </div>
@@ -120,11 +123,11 @@
                 </form>
                 <hr />
                 <div class="responsiveTable" id="incomes-table">
-                  	<!--here will be created table-->
+                    <!--here will be created table-->
                 </div>
             </div>
-         <!--END INCOMES-->
-         <!--PAYMENTS-->
+            <!--END INCOMES-->
+            <!--PAYMENTS-->
             <div id="payments" class="tab-pane fade in">
                 <h3>Add Payment</h3>
                 <form id="payments-form">
@@ -140,52 +143,40 @@
                 </form>
                 <hr />
                 <div class="responsiveTable" id="payments-table">
-                   	<!--here will be created table-->
+                    <!--here will be created table-->
                 </div>
             </div>
-         <!--END PAYMENTS-->
-      
-         <!--EURO CALCULATOR-->
-		 
-            <div id="euro-calculator" class="tab-pane fade in">
-			
-                <h3 class="ec">Euro calculator</h3>
-				<div class="ec_container">
-                 <div class="form-group" style="margin-left:15px">
-      
-    
-        <input type="number" id="eurInput" placeholder="Euro" ><label style="margin-left:10px">EUR</label>
-            <form id="curType">
-                <input type="radio" name="curren" id="usd" /><label for="usd"></label>
-                <input type="radio" name="curren" id="gbp" /><label for="gbp"></label>
-                <input type="radio" name="curren" id="aud" /><label for="aud"></label>  
-                <input type="radio" name="curren" id="czk" /><label for="czk"></label> 
-                <input type="radio" name="curren" id="cad" /><label for="cad"></label> 
-                <input type="radio" name="curren" id="chf" /><label for="chf"></label>
-            </form>
-                <input type="text" id="calculated" /><label for="calculated" ></label> 
-                <p type="number" id="curCalOut" />
-            </div>
-            </div>
-         <!--END EURO CALCULATOR-->    
-                </div> <!--end tab content-->
-		  </div><!--end background div-->
-     </div><!--end container-->
+            <!--END PAYMENTS-->
 
-<footer >
-	<div class="footer">
-	    <div class="socialnav">
-		   <ul class="social">
-		        <li><a href="https://github.com/wdfeww/ProjectSovy" class="social-icon"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a></li>
-		        <li><a href="https://www.facebook.com/itakademiasovy/" class="social-icon"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a></li>
-		        <li><a href="#" class="social-icon"><i class="fa fa-google-plus-official fa-2x" aria-hidden="true"></i></a></li>
-		        <li><a href="#" class="social-icon"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a></li>
-	           
-		   </ul>
-	    </div>
-	</div>
-</footer>
+            <!--EURO CALCULATOR-->
+
+            <div id="euro-calculator" class="tab-pane fade in">
+
+               <div id="calc"></div>
+
+                <!--END EURO CALCULATOR-->
+            </div>
+            <!--end tab content-->
+        </div>
+        <!--end background div-->
+    </div>
+    <!--end container-->
+
+    <footer>
+        <div class="footer">
+            <div class="socialnav">
+                <ul class="social">
+                    <li><a href="https://github.com/wdfeww/ProjectSovy" class="social-icon"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a></li>
+                    <li><a href="https://www.facebook.com/itakademiasovy/" class="social-icon"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="social-icon"><i class="fa fa-google-plus-official fa-2x" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="social-icon"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a></li>
+
+                </ul>
+            </div>
+        </div>
+    </footer>
 
 
 </body>
+
 </html>
