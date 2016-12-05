@@ -174,14 +174,14 @@ $(document).ready(function () {
 
 			clearInputFields: function () {
 			if(input.testAmount(input.getAmount())==true/*||input.testDescription(input.getDescription())==true*/){
-				$("#income-amount").val("");
-				$("#payment-amount").val("");
+				$("#income-amount").val(null);
+				$("#payment-amount").val(null);
 				
 
 			}
 			if(input.testDescription(input.getDescription())==true){
-				$("#income-description").val("");
-				$("#payment-description").val("");
+				$("#income-description").val(null);
+				$("#payment-description").val(null);
 				
 			}
 		}
