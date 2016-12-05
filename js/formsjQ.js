@@ -70,17 +70,17 @@ $(document).ready(function () {
 						var rowClass = 'i'+countIncome();
 						incomeObjects.push({description: d, amount: a});
 						incomesTable.addRow([true, incomeObjects[incomeObjects.length-1].description, 
-											incomeObjects[incomeObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowClass, '#00cc66');
+											incomeObjects[incomeObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowClass, '#8cd98c');
 						turnoversTable.addRow([true, incomeObjects[incomeObjects.length-1].description, 
-											incomeObjects[incomeObjects.length-1].amount], rowClass, '#00cc66');
+											incomeObjects[incomeObjects.length-1].amount], rowClass, '#8cd98c');
 					}
 					else {
 						var rowClass = 'p'+countPayment();
 						paymentObjects.push({description: d, amount: -a});
 						paymentsTable.addRow([true, paymentObjects[paymentObjects.length-1].description, 
-											paymentObjects[paymentObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowClass, '#ff5050');
+											paymentObjects[paymentObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowClass, '#ff9980');
 						turnoversTable.addRow([true, paymentObjects[paymentObjects.length-1].description, 
-											paymentObjects[paymentObjects.length-1].amount], rowClass, '#ff5050');
+											paymentObjects[paymentObjects.length-1].amount], rowClass, '#ff9980');
 					}
 				}
 			},
@@ -174,13 +174,15 @@ $(document).ready(function () {
 
 			clearInputFields: function () {
 			if(input.testAmount(input.getAmount())==true/*||input.testDescription(input.getDescription())==true*/){
-				$("#incomeAmount").val("");
-				$("#paymentAmount").val("");
+				$("#income-amount").val("");
+				$("#payment-amount").val("");
+				
 
 			}
 			if(input.testDescription(input.getDescription())==true){
-				$("#incomeDesc").val("");
-				$("#paymentDesc").val("");
+				$("#income-description").val("");
+				$("#payment-description").val("");
+				
 			}
 		}
 
@@ -232,6 +234,7 @@ $(document).ready(function () {
 		    input.createObject(input.getDescription(), input.getAmount());
 		    balance.setValue();
 		    balance.setStyle();
+		    input.clearInputFields();
 			//$("input").val("");
 			
 
