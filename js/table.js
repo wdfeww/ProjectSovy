@@ -9,7 +9,7 @@ $(document).ready(function () {
 			cols : [],
 		}, options);
 
-		function getDate () {
+		selector.getDate = function () {
 			var y = new Date();
 		    var m = new Date();
 		    var d = new Date();
@@ -66,7 +66,7 @@ $(document).ready(function () {
 		function setCol (rowData) {
 			for(var i = 0, length1 = settings.cols.length; i < length1; i++){
 				if (settings.cols[i] == 'Date' && rowData[i] == true) {
-					rowData[i] = getDate();
+					rowData[i] = selector.getDate();
 				}
 			}
 		}

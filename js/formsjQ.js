@@ -9,6 +9,7 @@ $(document).ready(function () {
 		
 		var incomeObjects = [];
 		var paymentObjects = [];
+		var data = [];
 		var button = $('.submit-button');
 		var incomesTable = $('#incomes-table').initTable({cols : ['Date', 'Description', 'Amount', 'Delete']});
 		var paymentsTable = $('#payments-table').initTable({cols : ['Date', 'Description', 'Amount', 'Delete']});
@@ -68,6 +69,8 @@ $(document).ready(function () {
 					if( input.getTab() == "incomes-tab"){
 						var rowClass = 'i'+countIncome();
 						incomeObjects.push({description: d, amount: a});
+						data.push({ date : incomesTable.getDate(), description: d, amount: a});
+						console.log(data[0]);
 						incomesTable.addRow([true, incomeObjects[incomeObjects.length-1].description, 
 											incomeObjects[incomeObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowClass, '#8cd98c');
 						turnoversTable.addRow([true, incomeObjects[incomeObjects.length-1].description, 
@@ -76,6 +79,8 @@ $(document).ready(function () {
 					else {
 						var rowClass = 'p'+countPayment();
 						paymentObjects.push({description: d, amount: -a});
+						data.push({ date : paymentsTable.getDate(), description: d, amount : -a});
+						console.log(data[1]);
 						paymentsTable.addRow([true, paymentObjects[paymentObjects.length-1].description, 
 											paymentObjects[paymentObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowClass, '#ff9980');
 						turnoversTable.addRow([true, paymentObjects[paymentObjects.length-1].description, 
