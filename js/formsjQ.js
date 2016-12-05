@@ -127,6 +127,7 @@ $(document).ready(function () {
 			        $('<div>Incorrect input.</div>').attr("id", "feedback3").addClass("error").appendTo("#paymentDesc");
 			        $("#paymentAmount").addClass("has-error form-control-error");
 			        $('<div>Incorrect input.</div>').attr("id", "feedback4").addClass("error").appendTo("#paymentAmount");
+
 			        
 
 			    }
@@ -169,7 +170,19 @@ $(document).ready(function () {
 			    if ($("#paymentDesc").has("#feedback4")) {
 			        $("#feedback4").remove();
 			    }
+			},
+
+			clearInputFields: function () {
+			if(input.testAmount(input.getAmount())==true/*||input.testDescription(input.getDescription())==true*/){
+				$("#incomeAmount").val("");
+				$("#paymentAmount").val("");
+
 			}
+			if(input.testDescription(input.getDescription())==true){
+				$("#incomeDesc").val("");
+				$("#paymentDesc").val("");
+			}
+		}
 
 		};
 
@@ -194,8 +207,14 @@ $(document).ready(function () {
 
 			    }
 			    else {
-			        $(".balance-value").removeClass("success");
-			        $(".balance-value").addClass("error");
+			    	if(bal<0){
+			        	$(".balance-value").removeClass("success");
+			       		$(".balance-value").addClass("error");
+			    	}
+			    	else{
+			    		$(".balance-value").removeClass("success");
+			    		$(".balance-value").removeClass("error");
+			    	}
 			    }
 			}
 		};
@@ -213,7 +232,9 @@ $(document).ready(function () {
 		    input.createObject(input.getDescription(), input.getAmount());
 		    balance.setValue();
 		    balance.setStyle();
-			$("input").val(" ");
+			//$("input").val("");
+			
+
 		});
 		
 
