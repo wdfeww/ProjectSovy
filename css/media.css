@@ -19,15 +19,6 @@ input[type=number] {
     border-radius: 15px;
 }
 
-.affix {
-      top: 0;
-      width: 100%;
-  }
-
-.affix + .container {
-    padding-top: 70px;
-}
-
 .balance{
 	font-weight:bold;
 	padding-right:10px;
@@ -177,6 +168,31 @@ table{
 	background-color: transparent;
 
 }
+
+/*
+	Back to top arrow
+ */
+
+.back-to-top {
+	position: fixed;
+	bottom: 30px;
+	right: 10px;
+	color: #46b8da;
+	display: block;
+	z-index: 10;
+	opacity: 0.85;
+}
+
+.back-to-top:hover,
+.back-to-top:focus {
+	color: #46b8da;
+	opacity: 1;
+	transition: opacity 0.4s;
+}
+
+/*
+	END - Back to top arrow
+ */
 
 .navbar-inverse{
 	z-index: 1000;

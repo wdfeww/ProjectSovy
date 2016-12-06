@@ -1,16 +1,24 @@
 $(document).ready(function () {
     (function ($) {
-function collapseNav() {
-    document.getElementById("my_navbar").className = "navbar-collapse collapse";
-}
 
-function activateHome() {
-    var i = 1;
-    document.getElementById("my_navbar").getElementsByTagName('li')[0].className = "active";
-    for (i = 1; i <= 4; i++) {
-        document.getElementById("my_navbar").getElementsByTagName('li')[i].className = "";
-    }
-}
+        var backToTop = $('<a>', {
+            href: '#home',
+            class: 'back-to-top',
+            html: '<i class="fa fa-caret-up fa-5x"></i>',
+        });
+
+        backToTop
+            .hide()
+            .appendTo('body')
+            .on('click', function () {
+                $('body').animate({ scrollTop: 0 });
+            });
+
+        var win = $(window);
+        win.on('scroll', function() {
+            if ( win.scrollTop() >= 180 ) backToTop.fadeIn();
+            else backToTop.fadeOut();
+        });
 
     })(jQuery);
 
