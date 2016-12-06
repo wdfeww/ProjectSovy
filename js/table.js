@@ -45,9 +45,9 @@ $(document).ready(function () {
 			selector.append(table);
 		}
 
-		selector.addRow = function (rowData, rowClass, rowColor) {
+		selector.addRow = function (rowData, rowId, rowColor) {
 			setCol(rowData);
-			var row = $('<tr></tr>').addClass(rowClass).css('background-color', rowColor);
+			var row = $('<tr></tr>').attr('data-class', rowId).css('background-color', rowColor);
 			for(var i = 0, length1 = rowData.length; i < length1; i++){
 				var col = $('<td/>');
 				col = col.append(rowData[i]);
@@ -58,9 +58,8 @@ $(document).ready(function () {
 		}
 
 		selector.deleteRow = function (index) {
-			index = '.'+index;
 			console.log(index);
-			selector.find(index).remove();
+			selector.find("[data-class='" + index + "']").remove();
 		}
 
 		function setCol (rowData) {
