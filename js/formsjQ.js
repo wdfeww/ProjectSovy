@@ -261,6 +261,7 @@ $(document).ready(function () {
 			turnoversTable.deleteRow(rowIndex);
 			incomeObjects.splice(index, 1);
 			balance.setValue();
+			balance.setStyle();
 		});
 
 		paymentsTable.on('click', 'img', function () {
@@ -270,6 +271,7 @@ $(document).ready(function () {
 			turnoversTable.deleteRow(rowIndex);
 			paymentObjects.splice(index, 1);
 			balance.setValue();
+			balance.setStyle();
 		});
 		
 		
