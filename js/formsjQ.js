@@ -56,22 +56,22 @@ $(document).ready(function () {
 			},
 
 		
-			testDescription : function (d) {
-				if( d.length>0 && d.indexOf('<')==-1) return true;
+			testDescription : function (desc) {
+				if( desc.length>0 && desc.indexOf('<')==-1) return true;
 				else return false;
 			},
 
-			testAmount : function (a) {
-			    if (a >= 1 && ((a * 1000) % 10) == 0 && $.isNumeric(a)) return true;
+			testAmount : function (amount) {
+			    if (amount >= 1 && ((amount * 1000) % 10) == 0 && $.isNumeric(amount)) return true;
 				else return false;
 			},
 
-			createObject: function (d, a) {
-				if( input.testDescription(d)&& input.testAmount(a) ) {
+			createObject: function (desc, amount) {
+				if( input.testDescription(desc)&& input.testAmount(amount) ) {
 					if( input.getTab() == "incomes-tab"){
 						var rowIdentifier = 'i'+countIncome();
-						incomeObjects.push({description: d, amount: a});
-						data.push({ date : incomesTable.getDate(), description: d, amount: a});
+						incomeObjects.push({description: desc, amount: amount});
+						data.push({ date : incomesTable.getDate(), description: desc, amount: amount});
 						console.log(data[0]);
 						incomesTable.addRow([true, incomeObjects[incomeObjects.length-1].description, 
 											incomeObjects[incomeObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowIdentifier, '#8cd98c');
@@ -80,8 +80,8 @@ $(document).ready(function () {
 					}
 					else {
 						var rowIdentifier = 'p'+countPayment();
-						paymentObjects.push({description: d, amount: -a});
-						data.push({ date : paymentsTable.getDate(), description: d, amount : -a});
+						paymentObjects.push({description: desc, amount: -amount});
+						data.push({ date : paymentsTable.getDate(), description: desc, amount : -amount});
 						console.log(data[1]);
 						paymentsTable.addRow([true, paymentObjects[paymentObjects.length-1].description, 
 											paymentObjects[paymentObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowIdentifier, '#ff9980');
