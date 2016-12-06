@@ -133,9 +133,7 @@ $(document).ready(function () {
 			        $('<div>Incorrect input.</div>').attr("id", "feedback3").addClass("error").appendTo("#paymentDesc");
 			        $("#paymentAmount").addClass("has-error form-control-error");
 			        $('<div>Incorrect input.</div>').attr("id", "feedback4").addClass("error").appendTo("#paymentAmount");
-
 			        
-
 			    }
 			    else {
 			        if (paymentDescription==true && paymentAmount==false) {
