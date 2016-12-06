@@ -3,72 +3,72 @@
 
     $.fn.euroCalculator = function () {
         $('<div />', {
-            "class": 'ec_container'
+            "class": 'ec-container'
         }).appendTo(this);
         $('<h3 />', {
             "class": 'ec'
-        }).text('Euro calculator').appendTo('.ec_container');
+        }).text('Euro calculator').appendTo('.ec-container');
         $('<input />', {
-            "id": 'eurInput',
+            "id": 'eur-Input',
             "placeholder": 'Euro',
             "type": 'number'
-        }).appendTo('.ec_container');
+        }).appendTo('.ec-container');
         $('<div />', {
-            "id": 'curType'
-        }).appendTo('.ec_container');
+            "id": 'cur-Type'
+        }).appendTo('.ec-container');
         $('<input />', {
             "id": 'usd',
             "name": 'curren',
             "type": 'radio'
-        }).appendTo('#curType');
+        }).appendTo('#cur-Type');
         $('<label />', {
             "for": 'usd'
-        }).appendTo('#curType');
+        }).appendTo('#cur-Type');
         $('<input />', {
             "id": 'gbp',
             "name": 'curren',
             "type": 'radio'
-        }).appendTo('#curType');
+        }).appendTo('#cur-Type');
         $('<label />', {
             "for": 'gbp'
-        }).appendTo('#curType');
+        }).appendTo('#cur-Type');
         $('<input />', {
             "id": 'aud',
             "name": 'curren',
             "type": 'radio'
-        }).appendTo('#curType');
+        }).appendTo('#cur-Type');
         $('<label />', {
             "for": 'aud'
-        }).appendTo('#curType');
+        }).appendTo('#cur-Type');
         $('<input />', {
             "id": 'czk',
             "name": 'curren',
             "type": 'radio'
-        }).appendTo('#curType');
+        }).appendTo('#cur-Type');
         $('<label />', {
             "for": 'czk'
-        }).appendTo('#curType');
+        }).appendTo('#cur-Type');
         $('<input />', {
             "id": 'cad',
             "name": 'curren',
             "type": 'radio'
-        }).appendTo('#curType');
+        }).appendTo('#cur-Type');
         $('<label />', {
             "for": 'cad'
-        }).appendTo('#curType');
+        }).appendTo('#cur-Type');
         $('<input />', {
             "id": 'chf',
             "name": 'curren',
             "type": 'radio'
-        }).appendTo('#curType');
+        }).appendTo('#cur-Type');
         $('<label />', {
             "for": 'chf'
-        }).appendTo('#curType');
+        }).appendTo('#cur-Type');
         $('<input />', {
             "id": 'calculated',
             "type": 'text',
             "readonly": 'readonly'
-        }).appendTo('.ec_container');
+        }).appendTo('.ec-container');
 
         var convert = function () {
             var output = $("#calculated");
@@ -80,18 +80,16 @@
                 cad: 1.46707,
                 chf: 1.07414
             };
-            var value = ($("#eurInput").val())
-            var type = ($('input[name=curren]:checked', '#curType').attr("id"));
+            var value = ($("#eur-Input").val())
+            var type = ($('input[name=curren]:checked', '#cur-Type').attr("id"));
             if (!$.isNumeric(value) || (value.indexOf('e') > -1)) {
-                output.val("Bad input!");
-                output.addClass("text-danger");
+                output.val("");
             } else {
-                output.removeClass();
                 output.val((value * currenclyType[type]).toFixed(2) + " " + type.toUpperCase());
             }
         }
 
-        $("#eurInput").on("keyup", convert);
+        $("#eur-Input").on("keyup", convert);
         $("input[name=curren]:radio").on("click", convert);
 
 
