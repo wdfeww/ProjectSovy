@@ -179,16 +179,23 @@ $(document).ready(function () {
 			},
 
 			clearInputFields: function () {
-			if(input.testAmount(input.getAmount())==true/*||input.testDescription(input.getDescription())==true*/){
+			if(input.testAmount(input.getAmount())==true&&input.testDescription(input.getDescription())==true){
 				$("#income-amount").val(null);
 				$("#payment-amount").val(null);
-				
-
-			}
-			if(input.testDescription(input.getDescription())==true){
 				$("#income-description").val(null);
 				$("#payment-description").val(null);
-				
+			}
+			else{
+				if(input.testAmount(input.getAmount())==true&&input.testDescription(input.getDescription())==false){
+					$("#income-description").val(null);
+					$("#payment-description").val(null);
+				}
+				else{
+					if(input.testAmount(input.getAmount())==false&&input.testDescription(input.getDescription())==true){
+						$("#income-amount").val(null);
+						$("#payment-amount").val(null);
+					}
+				}
 			}
 		}
 
