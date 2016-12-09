@@ -2,7 +2,7 @@ $(document).ready(function () {
     (function ($) {
 
         var backToTop = $('<a>', {
-            href: '#home',
+            href: '#top',
             class: 'back-to-top',
             html: '<i class="fa fa-caret-up fa-5x"></i>',
         });
@@ -16,8 +16,8 @@ $(document).ready(function () {
 
         var win = $(window);
         win.on('scroll', function() {
-            if ( win.scrollTop() >= 180 ) backToTop.fadeIn();
-            else backToTop.fadeOut();
+            if ( win.scrollTop() >= 180 ) backToTop.stop().fadeIn();
+            else backToTop.stop().fadeOut();
         });
 
     })(jQuery);
