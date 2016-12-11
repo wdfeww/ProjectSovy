@@ -3,16 +3,24 @@
 
     $.fn.euroCalculator = function () {
         var currenclyType = {};
-           
-         $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22EURUSD%22%2C%20%22EURGBP%22%20%2C%20%22EURAUD%22%20%2C%20%22EURCZK%22%20%2C%20%22EURCAD%22%20%2C%20%22EURCHF%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=", function (data) {
-             currenclyType["usd"] = data.query.results.rate[0].Rate;
-             currenclyType["gbp"] = data.query.results.rate[1].Rate;
-             currenclyType["aud"] = data.query.results.rate[2].Rate;
-             currenclyType["czk"] = data.query.results.rate[3].Rate;
-             currenclyType["cad"] = data.query.results.rate[4].Rate;
-             currenclyType["chf"] = data.query.results.rate[5].Rate;
-        });
 
+        $.ajax({
+                url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22EURUSD%22%2C%20%22EURGBP%22%20%2C%20%22EURAUD%22%20%2C%20%22EURCZK%22%20%2C%20%22EURCAD%22%20%2C%20%22EURCHF%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=",
+                dataType: "json",
+                method: "GET"
+            })
+            .done(function (data) {
+                $("#server-error").hide();
+                currenclyType["usd"] = data.query.results.rate[0].Rate;
+                currenclyType["gbp"] = data.query.results.rate[1].Rate;
+                currenclyType["aud"] = data.query.results.rate[2].Rate;
+                currenclyType["czk"] = data.query.results.rate[3].Rate;
+                currenclyType["cad"] = data.query.results.rate[4].Rate;
+                currenclyType["chf"] = data.query.results.rate[5].Rate;
+            })
+            .fail(function () {
+                $("#server-error").show();
+            });
 
         $('<div />', {
             "class": 'ec-container'
@@ -81,6 +89,11 @@
             "type": 'text',
             "readonly": 'readonly'
         }).appendTo('.ec-container');
+        $('<div />', {
+            "id": 'server-error'
+        }).appendTo('.ec-container');
+        $('<h2 />').text("Sorry!").appendTo('#server-error');
+        $('<h4 />').text("Unable to download currency exchange rates from server").appendTo('#server-error');
 
         var convert = function () {
             var output = $("#calculated");
