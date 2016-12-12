@@ -11,15 +11,38 @@
             })
             .done(function (data) {
                 $("#server-error").hide();
-                currenclyType["usd"] = data.query.results.rate[0].Rate;
-                currenclyType["gbp"] = data.query.results.rate[1].Rate;
-                currenclyType["aud"] = data.query.results.rate[2].Rate;
-                currenclyType["czk"] = data.query.results.rate[3].Rate;
-                currenclyType["cad"] = data.query.results.rate[4].Rate;
-                currenclyType["chf"] = data.query.results.rate[5].Rate;
+                if ($.isNumeric(data.query.results.rate[0].Rate && data.query.results.rate[1].Rate && data.query.results.rate[2].Rate && data.query.results.rate[3].Rate && data.query.results.rate[4].Rate && data.query.results.rate[5].Rate)) {
+                    currenclyType["usd"] = data.query.results.rate[0].Rate;
+                    currenclyType["gbp"] = data.query.results.rate[1].Rate;
+                    currenclyType["aud"] = data.query.results.rate[2].Rate;
+                    currenclyType["czk"] = data.query.results.rate[3].Rate;
+                    currenclyType["cad"] = data.query.results.rate[4].Rate;
+                    currenclyType["chf"] = data.query.results.rate[5].Rate;
+                }
+                else $("#server-error").show();
+            })
+            .fail(function () {
+               
+                $.ajax({
+                    url: "http://api.fixer.io/latest",
+                    dataType: "json",
+                    method: "GET"
+                })
+            .done(function (data) {
+                $("#server-error").hide();
+                if ($.isNumeric(data.rates.USD && data.rates.GBP && data.rates.AUD && data.rates.CZK && data.rates.CAD && data.rates.CHF)) {
+                    currenclyType["usd"] = data.rates.USD;
+                    currenclyType["gbp"] = data.rates.GBP;
+                    currenclyType["aud"] = data.rates.AUD;
+                    currenclyType["czk"] = data.rates.CZK;
+                    currenclyType["cad"] = data.rates.CAD;
+                    currenclyType["chf"] = data.rates.CHF;
+                }
+                else $("#server-error").show();
             })
             .fail(function () {
                 $("#server-error").show();
+            });
             });
 
         $('<div />', {
