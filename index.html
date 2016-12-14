@@ -103,14 +103,36 @@
             <!--turnovers-->
             <div id="turnovers" class="tab-pane fade in">
                 <h3>Turnovers</h3>
+
+                <div id="pageOptionsTurnovers" class="pageOptions">
+                <p class="paginationTitle">Items per page</p>
+                <select name="pageAmount" id="pagesTurnovers">
+                <option value="all">Show all</option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                </select>
+                </div>
+
                 <div class="responsiveTable" id="turnovers-table">
                     <!--here will be created table-->
                 </div>
+
+                <div class="paginated">
+                <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                </ul>
+                </div>
+
             </div>
             <!--END turnovers-->
             <!--INCOMES-->
             <div id="incomes" class="tab-pane fade in">
                 <h3>Add income</h3>
+
                 <form id="incomes-form">
                     <div class="form-group" id="incomeDesc">
                         <label for="description">Description:</label>
@@ -122,10 +144,31 @@
                     </div>
                     <button type="button" class="btn btn-info submit-button">Add</button>
                 </form>
+
+                <div id="pageOptionsIncomess" class="pageOptions">
+                <p class="paginationTitle">Items per page</p>
+                <select name="pageAmount" id="pagesIncomes">
+                <option value="all">Show all</option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                </select>
+                </div>
+
                 <hr />
                 <div class="responsiveTable" id="incomes-table">
                     <!--here will be created table-->
                 </div>
+
+                <div class="paginated">
+                <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                </ul>
+                </div>
+
             </div>
             <!--END INCOMES-->
             <!--PAYMENTS-->
@@ -142,10 +185,32 @@
                     </div>
                     <button type="button" class="btn btn-info submit-button">Add</button>
                 </form>
+
+                <div id="pageOptionsPayments" class="pageOptions">
+                <p class="paginationTitle">Items per page</p>
+                <select name="pageAmount" id="pagesPayments">
+                <option value="all">Show all</option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                </select>
+                </div> 
+
                 <hr />
+
                 <div class="responsiveTable" id="payments-table">
                     <!--here will be created table-->
                 </div>
+
+                <div class="paginated">
+                <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                </ul>
+                </div>
+
             </div>
             <!--END PAYMENTS-->
 
