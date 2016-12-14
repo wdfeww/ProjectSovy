@@ -72,10 +72,10 @@ $(document).ready(function () {
 						var rowIdentifier = 'i'+countIncome();
 						incomeObjects.push({description: desc, amount: amount});
 						data.push({ date : incomesTable.getDate(), description: desc, amount: amount});
-						console.log(data[0]);
-						incomesTable.addRow([true, incomeObjects[incomeObjects.length-1].description, 
+						console.log(typeof(incomeObjects[0].amount));
+						incomesTable.addRow(['date', incomeObjects[incomeObjects.length-1].description, 
 											incomeObjects[incomeObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowIdentifier, '#8cd98c');
-						turnoversTable.addRow([true, incomeObjects[incomeObjects.length-1].description, 
+						turnoversTable.addRow(['date', incomeObjects[incomeObjects.length-1].description, 
 											incomeObjects[incomeObjects.length-1].amount], rowIdentifier, '#8cd98c');
 					}
 					else {
@@ -83,9 +83,9 @@ $(document).ready(function () {
 						paymentObjects.push({description: desc, amount: -amount});
 						data.push({ date : paymentsTable.getDate(), description: desc, amount : -amount});
 						console.log(data[1]);
-						paymentsTable.addRow([true, paymentObjects[paymentObjects.length-1].description, 
+						paymentsTable.addRow(['date', paymentObjects[paymentObjects.length-1].description, 
 											paymentObjects[paymentObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowIdentifier, '#ff9980');
-						turnoversTable.addRow([true, paymentObjects[paymentObjects.length-1].description, 
+						turnoversTable.addRow(['date', paymentObjects[paymentObjects.length-1].description, 
 											paymentObjects[paymentObjects.length-1].amount], rowIdentifier, '#ff9980');
 					}
 				}
@@ -255,8 +255,9 @@ $(document).ready(function () {
 		incomesTable.on('click', 'img', function () {
 			var index = $(this).parent().parent().index();
 			var rowIndex = $(this).parent().parent().data('class');
-			incomesTable.deleteRow(rowIndex);
-			turnoversTable.deleteRow(rowIndex);
+			console.log(rowIndex);
+			incomesTable.deleteRow(rowIndex, index);
+			turnoversTable.deleteRow(rowIndex, index);
 			incomeObjects.splice(index, 1);
 			balance.setValue();
 			balance.setStyle();
@@ -265,8 +266,8 @@ $(document).ready(function () {
 		paymentsTable.on('click', 'img', function () {
 			var index = $(this).parent().parent().index();
 			var rowIndex = $(this).parent().parent().data('class');
-			paymentsTable.deleteRow(rowIndex);
-			turnoversTable.deleteRow(rowIndex);
+			paymentsTable.deleteRow(rowIndex, index);
+			turnoversTable.deleteRow(rowIndex, index);
 			paymentObjects.splice(index, 1);
 			balance.setValue();
 			balance.setStyle();

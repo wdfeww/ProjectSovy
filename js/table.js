@@ -4,6 +4,8 @@ $(document).ready(function () {
 		var selector = this;
 		var tbody = $('<tbody/>');
 		var table = $('<table/>');
+		var dataIncomes = [];
+		var dataPayments = [];
 
 		var settings = $.extend({
 			cols : [],
@@ -46,7 +48,29 @@ $(document).ready(function () {
 		}
 
 		selector.addRow = function (rowData, rowId, rowColor) {
-			setCol(rowData);
+			var amount;
+			var description;
+			var object = { description : null, amount : null, date : null};
+			//setCol(rowData);
+			for(var i = 0, length1 = rowData.length; i < length1; i++){
+				if (typeof(rowData[i]) == 'number') {
+					object.amount = rowData[i];
+				}
+				else if (typeof(rowData[i]) == 'string' && rowData[i] != 'date') {
+					object.description = rowData[i];
+				}
+				else if (rowData[i] == 'date'){
+					object.date = selector.getDate();
+				}
+			}
+			if (object.amount < 0) {				
+				dataPayments.push(object);
+			}
+			else{
+				dataIncomes.push(object);
+			}
+			console.log(dataIncomes[0]);
+			console.log(dataPayments[0]);
 			var row = $('<tr></tr>').attr('data-class', rowId).css('background-color', rowColor);
 			for(var i = 0, length1 = rowData.length; i < length1; i++){
 				var col = $('<td/>');
@@ -57,17 +81,28 @@ $(document).ready(function () {
 			table.append(tbody);
 		}
 
-		selector.deleteRow = function (index) {
-			console.log(index);
+		selector.deleteRow = function (index, arrayIndex) {
 			selector.find("[data-class='" + index + "']").remove();
+			if (index.charAt(0) == 'p') {
+				dataPayments.splice(arrayIndex, 1);
+			}
+			else {
+				dataIncomes.splice(arrayIndex, 1);
+			}
+			console.log(dataIncomes[0]);
+			console.log(dataPayments[0]);
 		}
 
-		function setCol (rowData) {
-			for(var i = 0, length1 = settings.cols.length; i < length1; i++){
-				if (settings.cols[i] == 'Date' && rowData[i] == true) {
-					rowData[i] = selector.getDate();
-				}
-			}
+		//function setCol (rowData) {
+		//	for(var i = 0, length1 = settings.cols.length; i < length1; i++){
+		//		if (settings.cols[i] == 'Date' && rowData[i] == true) {
+		//			rowData[i] = selector.getDate();
+		//		}
+		//	}
+		//}
+
+		selector.sortTableByAmount = function (tableName) {
+			selector.find('tr').eq(0); 
 		}
 		
 		createTable();
