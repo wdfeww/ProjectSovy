@@ -51,7 +51,7 @@ $(document).ready(function () {
 			var amount;
 			var description;
 			var object = { description : null, amount : null, date : null};
-			//setCol(rowData);
+			setCol(rowData);
 			for(var i = 0, length1 = rowData.length; i < length1; i++){
 				if (typeof(rowData[i]) == 'number') {
 					object.amount = rowData[i];
@@ -63,14 +63,13 @@ $(document).ready(function () {
 					object.date = selector.getDate();
 				}
 			}
+			console.log(object.amount);
 			if (object.amount < 0) {				
 				dataPayments.push(object);
 			}
 			else{
 				dataIncomes.push(object);
 			}
-			console.log(dataIncomes[0]);
-			console.log(dataPayments[0]);
 			var row = $('<tr></tr>').attr('data-class', rowId).css('background-color', rowColor);
 			for(var i = 0, length1 = rowData.length; i < length1; i++){
 				var col = $('<td/>');
@@ -89,20 +88,26 @@ $(document).ready(function () {
 			else {
 				dataIncomes.splice(arrayIndex, 1);
 			}
-			console.log(dataIncomes[0]);
-			console.log(dataPayments[0]);
 		}
 
-		//function setCol (rowData) {
-		//	for(var i = 0, length1 = settings.cols.length; i < length1; i++){
-		//		if (settings.cols[i] == 'Date' && rowData[i] == true) {
-		//			rowData[i] = selector.getDate();
-		//		}
-		//	}
-		//}
+		function setCol (rowData) {
+			for(var i = 0, length1 = settings.cols.length; i < length1; i++){
+				if (settings.cols[i] == 'Date' && rowData[i] == 'date') {
+					rowData[i] = selector.getDate();
+				}
+			}
+		}
 
 		selector.sortTableByAmount = function (tableName) {
 			selector.find('tr').eq(0); 
+		}
+
+		selector.getIncomesData = function () {
+			return dataIncomes;
+		}
+
+		selector.getPaymentsData = function () {
+			return dataPayments;
 		}
 		
 		createTable();

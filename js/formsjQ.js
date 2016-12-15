@@ -9,9 +9,6 @@ $(document).ready(function () {
 
 		$("#calc").euroCalculator();
 
-		var incomeObjects = [];
-		var paymentObjects = [];
-		var data = [];
 		var button = $('.submit-button');
 		var incomesTable = $('#incomes-table').initTable({cols : ['Date', 'Description', 'Amount', 'Delete']});
 		var paymentsTable = $('#payments-table').initTable({cols : ['Date', 'Description', 'Amount', 'Delete']});
@@ -70,23 +67,13 @@ $(document).ready(function () {
 				if( input.testDescription(desc)&& input.testAmount(amount) ) {
 					if( input.getTab() == "incomes-tab"){
 						var rowIdentifier = 'i'+countIncome();
-						incomeObjects.push({description: desc, amount: amount});
-						data.push({ date : incomesTable.getDate(), description: desc, amount: amount});
-						console.log(typeof(incomeObjects[0].amount));
-						incomesTable.addRow(['date', incomeObjects[incomeObjects.length-1].description, 
-											incomeObjects[incomeObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowIdentifier, '#8cd98c');
-						turnoversTable.addRow(['date', incomeObjects[incomeObjects.length-1].description, 
-											incomeObjects[incomeObjects.length-1].amount], rowIdentifier, '#8cd98c');
+						incomesTable.addRow(['date', desc, amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowIdentifier, '#8cd98c');
+						turnoversTable.addRow(['date', desc, amount], rowIdentifier, '#8cd98c');
 					}
 					else {
 						var rowIdentifier = 'p'+countPayment();
-						paymentObjects.push({description: desc, amount: -amount});
-						data.push({ date : paymentsTable.getDate(), description: desc, amount : -amount});
-						console.log(data[1]);
-						paymentsTable.addRow(['date', paymentObjects[paymentObjects.length-1].description, 
-											paymentObjects[paymentObjects.length-1].amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowIdentifier, '#ff9980');
-						turnoversTable.addRow(['date', paymentObjects[paymentObjects.length-1].description, 
-											paymentObjects[paymentObjects.length-1].amount], rowIdentifier, '#ff9980');
+						paymentsTable.addRow(['date', desc, -amount, $('<img>', { src : 'images/x.gif', alt : 'x'})], rowIdentifier, '#ff9980');
+						turnoversTable.addRow(['date', desc, -amount], rowIdentifier, '#ff9980');
 					}
 				}
 			},
@@ -201,14 +188,18 @@ $(document).ready(function () {
 
 		var balance = {
 
+			incomesData : incomesTable.getIncomesData(),
+			paymentsData : paymentsTable.getPaymentsData(),
 			setValue : function () {
 				var sum = 0, i;
-				for (i = 0; i < incomeObjects.length; i++) {
-					sum += (incomeObjects[i].amount)*100;
+				for (i = 0; i < this.incomesData.length; i++) {
+					sum += (this.incomesData[i].amount)*100;
 				}
-				for(i = 0; i < paymentObjects.length; i++){
-					sum += (paymentObjects[i].amount)*100;
+				for(i = 0; i < this.paymentsData.length; i++){
+					sum += (this.paymentsData[i].amount)*100;
 				}
+				console.log(this.incomesData[0])
+				console.log(this.paymentsData[0]);
 				$('#balance-value').text((sum / 100).toFixed(2));
 			},
 
@@ -255,10 +246,8 @@ $(document).ready(function () {
 		incomesTable.on('click', 'img', function () {
 			var index = $(this).parent().parent().index();
 			var rowIndex = $(this).parent().parent().data('class');
-			console.log(rowIndex);
 			incomesTable.deleteRow(rowIndex, index);
 			turnoversTable.deleteRow(rowIndex, index);
-			incomeObjects.splice(index, 1);
 			balance.setValue();
 			balance.setStyle();
 		});
@@ -268,7 +257,6 @@ $(document).ready(function () {
 			var rowIndex = $(this).parent().parent().data('class');
 			paymentsTable.deleteRow(rowIndex, index);
 			turnoversTable.deleteRow(rowIndex, index);
-			paymentObjects.splice(index, 1);
 			balance.setValue();
 			balance.setStyle();
 		});
