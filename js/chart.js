@@ -54,9 +54,9 @@ function initChart(data, dataIndex, deletedAmount) {
 
 $(document).ready(function () {
   $(".balance-click").on("click", function () {
-    // if (dataPoints.length != 0){
+     if (dataPoints.length != 0){
       $("#chartWindow").css("display", "block");
-    // }
+     }
   });
   $(".closeChart").on("click", function () {
     $("#chartWindow").css("display", "none");
