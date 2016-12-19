@@ -19,9 +19,9 @@ $(document).ready(function () {
         var turnoversTable = $('#turnovers-table').initTable({
             cols: ['Date', 'Description', 'Amount'],
             search: true
-
         });
-
+        var data = turnoversTable.getAllData();
+        
         var countIncome = (function () {
             var count = -1;
             return function () {
@@ -205,8 +205,8 @@ $(document).ready(function () {
                 for (i = 0; i < this.paymentsData.length; i++) {
                     sum += (this.paymentsData[i].amount) * 100;
                 }
-                console.log(this.incomesData[0])
-                console.log(this.paymentsData[0]);
+                /*console.log(this.incomesData[0])
+                console.log(this.paymentsData[0]);*/
                 $('#balance-value').text((sum / 100).toFixed(2));
             },
 
@@ -243,29 +243,34 @@ $(document).ready(function () {
             balance.setStyle();
             input.clearInputFields();
             //$("input").val("");
-
-
+            initChart(data, 0, 0);
         });
 
 
         incomesTable.on('click', 'img', function () {
             var index = $(this).parent().parent().index();
             var rowIndex = $(this).parent().parent().data('class');
-            var dataIndex = turnoversTable.find("[data-class='"+rowIndex+"']").index();
+            var allData = turnoversTable.getAllData();
+            var dataIndex = turnoversTable.find("[data-class='" + rowIndex + "']").index();
+            var deletedAmount = allData[dataIndex].amount;
             incomesTable.deleteRow(rowIndex, index,dataIndex);
             turnoversTable.deleteRow(rowIndex, index,dataIndex);
             balance.setValue();
             balance.setStyle();
+            initChart(allData, dataIndex, deletedAmount);
         });
 
         paymentsTable.on('click', 'img', function () {
             var index = $(this).parent().parent().index();
             var rowIndex = $(this).parent().parent().data('class');
+            var allData = turnoversTable.getAllData();
             var dataIndex = turnoversTable.find("[data-class='" + rowIndex + "']").index();
+            var deletedAmount = allData[dataIndex].amount;
             paymentsTable.deleteRow(rowIndex, index, dataIndex);
             turnoversTable.deleteRow(rowIndex, index, dataIndex);
             balance.setValue();
             balance.setStyle();
+            initChart(allData, dataIndex, deletedAmount);
         });
 
 

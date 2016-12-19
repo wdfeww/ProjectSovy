@@ -67,7 +67,7 @@ $(document).ready(function () {
                         rowData[i] = object.date;
                     }
                 }
-                console.log(object.amount);
+                // console.log(object.amount);
                 if (object.amount < 0) {
                     dataPayments.push(object);
 

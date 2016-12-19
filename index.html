@@ -17,6 +17,8 @@
     <script src="js/visual.js"></script>
     <script type="text/javascript" src="js/euro-calculator.js"></script>
     <link rel="stylesheet" href="css/euro-calculator.css">
+    <script src="js/jquery.canvasjs.min.js"></script>
+    <script src="js/chart.js"></script>
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
@@ -60,8 +62,10 @@
     </header>
     <!--end navigation-->
     <div class="container">
-        <p align="right" id="acc-balance" class="balance">Account Balance
-            <br /><span class="balance-value" id="balance-value">0.00</span></p>
+        <p align="right" id="acc-balance" class="balance">
+            <span class="balance-click">Account Balance</span><br />
+            <span class="balance-value balance-click" id="balance-value">0.00</span><br />
+            <span class="balance balance-click" id="show-chart">(show chart)</span></p>
         <!--tab content-->
         <div class="tab-content">
             <!--HOME-->
@@ -241,8 +245,14 @@
             </div>
         </div>
     </footer>
-
-
+    <!-- Chart container -->
+    <div id="chartWindow">
+        <div class="chartBox">
+            <span class="closeChart">&times;</span>
+            <div id="chartContainer"></div>
+        </div>   
+    </div>
+    <!-- end of Chart container -->
 </body>
 
 </html>
