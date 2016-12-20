@@ -273,6 +273,35 @@ $(document).ready(function () {
             initChart(allData, dataIndex, deletedAmount);
         });
 
+        $("#pagesPayments").on("change", function () {
+            var rowsPerPage= $(this).val();
+            var rowCount = $('#payments-table>table >tbody >tr').length;
+            var prevPayments= $('#prevPayments');
+            var nextPayments= $('#nextPayments');
+
+            paymentsTable.paginateTable(rowCount,rowsPerPage,prevPayments,nextPayments);
+
+        });
+
+        $("#pagesIncomes").on("change", function () {
+            var rowsPerPage= $(this).val();
+            var rowCount = $('#incomes-table>table >tbody >tr').length;
+            var prevIncomes= $('#prevIncomes');
+            var nextIncomes= $('#nextIncomes');
+
+            incomesTable.paginateTable(rowCount,rowsPerPage,prevIncomes,nextIncomes);
+
+        });
+
+        $("#pagesTurnovers").on("change", function () {
+            var rowsPerPage= $(this).val();
+            var rowCount = $('#turnovers-table>table >tbody >tr').length;
+            var prevTurnovers= $('#prevTurnovers');
+            var nextTurnovers= $('#nextTurnovers');
+            turnoversTable.paginateTable(rowCount,rowsPerPage,prevTurnovers,nextTurnovers);
+
+        });
+
 
 
     })(jQuery);

@@ -104,6 +104,68 @@ $(document).ready(function () {
                                 }
                             }*/
 
+
+            selector.paginateTable = function (rowCount,rowsPerPage,prev,next) {
+            $('table').removeAttr('id');
+            var pageAmount = Math.ceil(rowCount/rowsPerPage); //pages total
+            var rowIndex=0; //current row
+            var page=1; // current page
+
+            if(rowsPerPage=='all')
+                rowsPerPage=rowCount;
+
+            $(table).attr("id","paginatedTable"); //marks current table to be paginated
+            
+            $('#paginatedTable>tbody >tr').each(function () {
+                rowIndex++;
+                if(rowIndex>rowsPerPage){
+                    $(this).hide();
+                }
+                else if(rowIndex<=rowsPerPage){
+                    $(this).show();
+                }
+            
+
+            });
+            
+            $(prev).on("click",function() {
+                if(page>1){
+                page--;
+                    rowIndex=0;
+                    $('#paginatedTable>tbody>tr').each(function () {
+                        rowIndex++;
+                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)){
+                            $(this).hide();
+                }
+                        else{
+                            $(this).show();
+                }
+                
+
+            });
+                }
+            });//end prev
+
+            $(next).on("click",function() {
+                if(page<pageAmount){
+                    page++;
+                
+                $('#paginatedTable').find('tbody tr').hide();
+                    rowIndex=0;
+                    $('#paginatedTable>tbody>tr').each(function () {
+                        rowIndex++;
+                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)){
+                            $(this).hide();
+                }
+                        else{
+                            $(this).show();
+                }
+            });
+            }
+        });//end next
+        }
+
+
             selector.sortTableByAmount = function (tableName) {
                 selector.find('tr').eq(0);
             }
