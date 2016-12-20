@@ -1,10 +1,14 @@
 var dataPoints = [];
 var allSums = [];
+var dispChart = 0;
 
 function initChart(data, dataIndex, deletedAmount) {
       var sum=0;
-      /*console.log(dataIndex);
-      console.log(data);*/
+      if (data.length == 0)
+        dispChart=0;
+      else
+        dispChart=1;
+      
       for (i=0; i<data.length; i++) {
         sum += data[i].amount;
       }
@@ -54,8 +58,9 @@ function initChart(data, dataIndex, deletedAmount) {
 }
 
 $(document).ready(function () {
+  
   $(".balance-click").on("click", function () {
-     if (dataPoints.length != 0){
+     if (dispChart != 0){
       $("#chartWindow").css("display", "block");
      }
   });
