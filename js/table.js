@@ -107,14 +107,18 @@ $(document).ready(function () {
 
             selector.paginateTable = function (rowCount,rowsPerPage,prev,next) {
             $('table').removeAttr('id');
+            $('.paginatedTest').remove();
+            $('.pagenav').remove();
             var pageAmount = Math.ceil(rowCount/rowsPerPage); //pages total
             var rowIndex=0; //current row
             var page=1; // current page
+            var paginationContainer="<div class='paginatedTest'></div>";
 
             if(rowsPerPage=='all')
                 rowsPerPage=rowCount;
 
             $(table).attr("id","paginatedTable"); //marks current table to be paginated
+            $("#paginatedTable").parent().append(paginationContainer).append("<button type='button' id='prev' class='pagenav btn-info'>prev</button><button type='button' id='next' class='pagenav btn-info'>next</button>");
             
             $('#paginatedTable>tbody >tr').each(function () {
                 rowIndex++;
@@ -128,7 +132,7 @@ $(document).ready(function () {
 
             });
             
-            $(prev).on("click",function() {
+            $("#prev").on("click",function() {
                 if(page>1){
                 page--;
                     rowIndex=0;
@@ -141,12 +145,11 @@ $(document).ready(function () {
                             $(this).show();
                 }
                 
-
             });
                 }
             });//end prev
 
-            $(next).on("click",function() {
+            $("#next").on("click",function() {
                 if(page<pageAmount){
                     page++;
                 

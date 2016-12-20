@@ -227,22 +227,14 @@ table {
     color: #5CA7A7;
 }
 
-.paginated {
+.paginatedTest {
     margin: 10px;
     float: right;
 }
 
-.paginated ul {
-    list-style-type: none;
-}
 
-.paginated ul li {
-    float: left;
-    background-color: #5CA7A7;
-    padding: 5px;
-    margin-bottom: 10px;
-    color: white;
-}
+
+
 
 #search-Panel {
     float: left;
