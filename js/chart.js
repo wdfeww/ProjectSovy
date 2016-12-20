@@ -3,16 +3,17 @@ var allSums = [];
 
 function initChart(data, dataIndex, deletedAmount) {
       var sum=0;
-      
+      /*console.log(dataIndex);
+      console.log(data);*/
       for (i=0; i<data.length; i++) {
         sum += data[i].amount;
       }
-      if (dataIndex != 0) {
+      if (deletedAmount != 0) {
         for (i=dataIndex; i<data.length; i++) {
           allSums[i]=allSums[i+1]-deletedAmount;
         }
       }
-      if (dataIndex != 0) {
+      if (deletedAmount != 0) {
         allSums.splice( data.length, 1);
       }
       allSums[data.length-1]=sum;
