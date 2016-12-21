@@ -11,7 +11,7 @@ $(document).ready(function () {
 
         var button = $('.submit-button');
         var incomesTable = $('#incomes-table').initTable({
-            cols: ['Date', 'Description', 'Amount', 'Delete']
+            cols: ['Date', 'Description', 'Amount', 'Delete'],
         });
         var paymentsTable = $('#payments-table').initTable({
             cols: ['Date', 'Description', 'Amount', 'Delete']
@@ -74,17 +74,11 @@ $(document).ready(function () {
                 if (input.testDescription(desc) && input.testAmount(amount)) {
                     if (input.getTab() == "incomes-tab") {
                         var rowIdentifier = 'i' + countIncome();
-                        incomesTable.addRow(['date', desc, amount, $('<img>', {
-                            src: 'images/x.gif',
-                            alt: 'x'
-                        })], rowIdentifier, '#8cd98c');
+                        incomesTable.addRow(['date', desc, amount, 'DELETE_PICTURE'], rowIdentifier, '#8cd98c');
                         turnoversTable.addRow(['date', desc, amount], rowIdentifier, '#8cd98c');
                     } else {
                         var rowIdentifier = 'p' + countPayment();
-                        paymentsTable.addRow(['date', desc, -amount, $('<img>', {
-                            src: 'images/x.gif',
-                            alt: 'x'
-                        })], rowIdentifier, '#ff9980');
+                        paymentsTable.addRow(['date', desc, -amount, 'DELETE_PICTURE'], rowIdentifier, '#ff9980');
                         turnoversTable.addRow(['date', desc, -amount], rowIdentifier, '#ff9980');
                     }
                 }

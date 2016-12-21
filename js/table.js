@@ -9,7 +9,8 @@ $(document).ready(function () {
             var data = [];
             var settings = $.extend({
                 cols: [],
-                search: false
+                search: false,
+                deletePicture: $('<img/>', {src: 'images/x.gif'})
             }, options);
 
             selector.getDate = function () {
@@ -56,30 +57,28 @@ $(document).ready(function () {
                     amount: null,
                     date: null
                 };
-                // setCol(rowData);
+
                 for (var i = 0, length1 = rowData.length; i < length1; i++) {
                     if (typeof (rowData[i]) == 'number') {
                         object.amount = rowData[i];
-                    } else if (typeof (rowData[i]) == 'string' && rowData[i] != 'date') {
-                        object.description = rowData[i];
                     } else if (rowData[i] == 'date') {
                         object.date = selector.getDate();
                         rowData[i] = object.date;
+                    } else if (rowData[i] == 'DELETE_PICTURE'){
+                        rowData[i] = (settings.deletePicture).clone();
+                    } else if (typeof (rowData[i]) == 'string') {
+                        object.description = rowData[i];
                     }
                 }
-                // console.log(object.amount);
-                if (object.amount < 0) {
-                    dataPayments.push(object);
 
-                } else {
-                    dataIncomes.push(object);
-
-                }
+                if (object.amount < 0) dataPayments.push(object);
+                else dataIncomes.push(object);
                 data.push(object);
+
                 var row = $('<tr></tr>').attr('data-class', rowId).css('background-color', rowColor);
                 for (var i = 0, length1 = rowData.length; i < length1; i++) {
                     var col = $('<td/>');
-                    col = col.append(rowData[i]);
+                    col.append(rowData[i]);
                     row.append(col);
                 }
                 tbody.append(row);
@@ -95,15 +94,6 @@ $(document).ready(function () {
                     }
                     data.splice(dataIndex, 1);
                 }
-                /*
-                            function setCol(rowData) {
-                                for (var i = 0, length1 = settings.cols.length; i < length1; i++) {
-                                    if (settings.cols[i] == 'Date' && rowData[i] == 'date') {
-                                        rowData[i] = selector.getDate();
-                                    }
-                                }
-                            }*/
-
 
             selector.paginateTable = function (rowCount,rowsPerPage,prev,next) {
             $('table').removeAttr('id');
