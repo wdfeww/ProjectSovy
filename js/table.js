@@ -95,12 +95,29 @@ $(document).ready(function () {
                     data.splice(dataIndex, 1);
                 }
 
-            selector.paginateTable = function (rowsPerPage) {
 
+            var navCount=0;
+            selector.paginateTable = function (rowsPerPage) {
             var totalRows=0;   
             $(table).find("tr").slice(1).each(function(){
                 totalRows++;
             });//determines row count
+            var tableId=$(table).parent().attr("id");
+            var prev="prev"+tableId;
+            var next="next"+tableId;//because table-specific nav:D
+            if(navCount==0){
+            	$(table).parent().append("<div class='paginatedTest'><button type='button' id="+prev+" class='pagenav btn btn-primary active'>prev</button><button type='button' id="+next+" class='pagenav btn btn-primary active'>next</button></div>");
+            	navCount++;
+            }
+
+            if(totalRows<=rowsPerPage){
+            	 $("#"+next).attr("disabled",true);
+            	 $("#"+prev).attr("disabled",true);
+            }
+            else{
+            	$("#"+next).removeAttr("disabled");
+            	$("#"+prev).removeAttr("disabled");
+            } //end disabling buttons
 
             var pageAmount = Math.ceil(totalRows/rowsPerPage); //pages total
             var rowIndex=0; //current row
@@ -117,7 +134,7 @@ $(document).ready(function () {
 
             });
             
-            $("#prev").on("click",function() {
+            $("#"+prev).on("click",function() {
                 if(page>1){
                 page--;
                     rowIndex=0;
@@ -134,7 +151,7 @@ $(document).ready(function () {
                 }
             });//end prev
 
-            $("#next").on("click",function() {
+            $("#"+next).on("click",function() {
                 if(page<pageAmount){
                     page++;
                     rowIndex=0;
