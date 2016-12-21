@@ -95,22 +95,18 @@ $(document).ready(function () {
                     data.splice(dataIndex, 1);
                 }
 
-            selector.paginateTable = function (rowCount,rowsPerPage,prev,next) {
-            $('table').removeAttr('id');
-            $('.paginatedTest').remove();
-            $('.pagenav').remove();
-            var pageAmount = Math.ceil(rowCount/rowsPerPage); //pages total
+            selector.paginateTable = function (rowsPerPage) {
+
+            var totalRows=0;   
+            $(table).find("tr").slice(1).each(function(){
+                totalRows++;
+            });//determines row count
+
+            var pageAmount = Math.ceil(totalRows/rowsPerPage); //pages total
             var rowIndex=0; //current row
             var page=1; // current page
-            var paginationContainer="<div class='paginatedTest'></div>";
 
-            if(rowsPerPage=='all')
-                rowsPerPage=rowCount;
-
-            $(table).attr("id","paginatedTable"); //marks current table to be paginated
-            $("#paginatedTable").parent().append(paginationContainer).append("<button type='button' id='prev' class='pagenav btn-info'>prev</button><button type='button' id='next' class='pagenav btn-info'>next</button>");
-            
-            $('#paginatedTable>tbody >tr').each(function () {
+            $(table).find("tr").slice(1).each(function () {
                 rowIndex++;
                 if(rowIndex>rowsPerPage){
                     $(this).hide();
@@ -118,7 +114,6 @@ $(document).ready(function () {
                 else if(rowIndex<=rowsPerPage){
                     $(this).show();
                 }
-            
 
             });
             
@@ -126,7 +121,7 @@ $(document).ready(function () {
                 if(page>1){
                 page--;
                     rowIndex=0;
-                    $('#paginatedTable>tbody>tr').each(function () {
+                    $(table).find("tr").slice(1).each(function () {
                         rowIndex++;
                         if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)){
                             $(this).hide();
@@ -142,10 +137,8 @@ $(document).ready(function () {
             $("#next").on("click",function() {
                 if(page<pageAmount){
                     page++;
-                
-                $('#paginatedTable').find('tbody tr').hide();
                     rowIndex=0;
-                    $('#paginatedTable>tbody>tr').each(function () {
+                    $(table).find("tr").slice(1).each(function () {
                         rowIndex++;
                         if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)){
                             $(this).hide();
@@ -157,6 +150,7 @@ $(document).ready(function () {
             }
         });//end next
         }
+
 
 
             selector.sortTableByAmount = function (tableName) {
