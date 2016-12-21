@@ -328,7 +328,9 @@ table {
     text-decoration: none;
     cursor: pointer;
 }
-
+.hideMe{
+    display:none;
+}
 // * {
 //  outline: 1px solid red;
 // }

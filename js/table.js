@@ -202,7 +202,7 @@ $(document).ready(function () {
                     var searchWord = $(this).val();
 
                     if ($(this).val() == "") {
-                        $("#turnovers-table>table>tbody").children().show();
+                        $("#turnovers-table>table>tbody").children().removeClass();
                         for (var i = 0; i <= data.length - 1; i++) {
                             $("#turnovers-table>table>tbody").children().eq(i).children().eq(1).html(data[i].description);
                             $("#turnovers-table>table>tbody").children().eq(i).children().eq(2).html(data[i].amount);
@@ -211,23 +211,23 @@ $(document).ready(function () {
                     } else {
 
 
-                        $("#turnovers-table>table>tbody").children().hide();
+                        $("#turnovers-table>table>tbody").children().addClass("hideMe");
                         for (var i = 0; i <= data.length - 1; i++) {
                             var reg = new RegExp(searchWord, 'gi');
                             if (data[i].description.match(reg)) {
-                                $("#turnovers-table>table>tbody").children().eq(i).show();
+                                $("#turnovers-table>table>tbody").children().eq(i).removeClass();
                                 var highlightedString = (data[i].description).replace(reg, function (str) {
                                     return '<span class="highlight">' + str + '</span>'
                                 });
                                 $("#turnovers-table>table>tbody").children().eq(i).children().eq(1).html(highlightedString);
                                 countOfFound++;
                             } else if (parseFloat(data[i].amount) == parseFloat(searchWord)) {
-                                $("#turnovers-table>table>tbody").children().eq(i).show();
+                                $("#turnovers-table>table>tbody").children().eq(i).removeClass();
                                 var highlightedString = '<span class="highlight">' + data[i].amount + '</span>';
                                 $("#turnovers-table>table>tbody").children().eq(i).children().eq(2).html(highlightedString);
                                 countOfFound++;
                             } else if (data[i].date.match(reg)) {
-                                $("#turnovers-table>table>tbody").children().eq(i).show();
+                                $("#turnovers-table>table>tbody").children().eq(i).removeClass();
                                 var highlightedString = (data[i].date).replace(reg, function (str) {
                                     return '<span class="highlight">' + str + '</span>'
                                 });
@@ -237,7 +237,14 @@ $(document).ready(function () {
                         }
                     }
                     parseFloat(searchWord);
-                    $("#countOfFound").text("Founded: " + (countOfFound) + " results");
+                    if($(this).val() == ""){
+                        $("#countOfFound").text("");
+                    }
+                    else if(countOfFound==1){
+                    $("#countOfFound").text("Found: " + (countOfFound) + " result");
+                    }
+                    else{$("#countOfFound").text("Found: " + (countOfFound) + " results");
+                    }
                 });
             }
             //search
