@@ -208,7 +208,9 @@ table {
 .pagenav{
     margin:5px;
 }
-
+.pageOptions{
+    float:right;
+}
 
 
 

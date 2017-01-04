@@ -12,13 +12,16 @@ $(document).ready(function () {
         var button = $('.submit-button');
         var incomesTable = $('#incomes-table').initTable({
             cols: ['Date', 'Description', 'Amount', 'Delete'],
+            paginateTable:true
         });
         var paymentsTable = $('#payments-table').initTable({
-            cols: ['Date', 'Description', 'Amount', 'Delete']
+            cols: ['Date', 'Description', 'Amount', 'Delete'],
+            paginateTable:true
         });
         var turnoversTable = $('#turnovers-table').initTable({
             cols: ['Date', 'Description', 'Amount'],
-            search: true
+            search: true,
+            paginateTable:true
         });
         var data = turnoversTable.getAllData();
         
@@ -238,9 +241,6 @@ $(document).ready(function () {
             input.clearInputFields();
             //$("input").val("");
             initChart(data, 0, 0);
-            paymentsTable.paginateTable(5);
-            incomesTable.paginateTable(5);
-            turnoversTable.paginateTable(5);
         });
 
 
@@ -269,25 +269,6 @@ $(document).ready(function () {
             balance.setStyle();
             initChart(allData, dataIndex, deletedAmount);
         });
-
-        $("#pagesPayments").on("change", function () {
-            var rowsPerPage= $(this).val();
-            paymentsTable.paginateTable(rowsPerPage);
-
-        });
-
-        $("#pagesIncomes").on("change", function () {
-            var rowsPerPage= $(this).val();
-            incomesTable.paginateTable(rowsPerPage);
-
-        });
-
-        $("#pagesTurnovers").on("change", function () {
-            var rowsPerPage= $(this).val();
-            turnoversTable.paginateTable(rowsPerPage);
-
-        });
-
 
 
     })(jQuery);

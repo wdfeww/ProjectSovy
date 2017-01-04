@@ -10,7 +10,8 @@ $(document).ready(function () {
             var settings = $.extend({
                 cols: [],
                 search: false,
-                deletePicture: $('<img/>', {src: 'images/x.gif'})
+                deletePicture: $('<img/>', {src: 'images/x.gif'}),
+                paginateTable:false
             }, options);
 
             selector.getDate = function () {
@@ -83,6 +84,8 @@ $(document).ready(function () {
                 }
                 tbody.append(row);
                 table.append(tbody);
+                if (settings.paginateTable == true)
+                paginateTable();
             }
 
             selector.deleteRow = function (index, arrayIndex, dataIndex) {
@@ -93,31 +96,28 @@ $(document).ready(function () {
                         dataIncomes.splice(arrayIndex, 1);
                     }
                     data.splice(dataIndex, 1);
+                    if (settings.paginateTable == true)
+                		paginateTable();
                 }
 
 
             var navCount=0;
-            selector.paginateTable = function (rowsPerPage) {
-            var totalRows=0;   
+            function paginateTable() {
+            var totalRows=0;
+            var tableId=$(table).parent().attr("id");
+            var select="select"+tableId;
+            var prev="prev"+tableId;
+            var next="next"+tableId;//because table-specific nav:D
+            	if(navCount==0){
+            	$(table).parent().append("<div class='paginatedTest'><button type='button' id ="+prev+" class='pagenav btn btn-primary active'>prev</button><button type='button' id="+next+" class='pagenav btn btn-primary active'>next</button></div>");
+            	$(table).parent().prepend('<div id="pageOptions" class="pageOptions"><p class="paginationTitle">Items per page</p><select name="pageAmount" id='+select+'><option value="5">5</option><option value="10">10</option></select></div>');
+            	navCount++;
+            }
+            var rowsPerPage=$("#"+select).val();
+
             $(table).find("tr").slice(1).each(function(){
                 totalRows++;
             });//determines row count
-            var tableId=$(table).parent().attr("id");
-            var prev="prev"+tableId;
-            var next="next"+tableId;//because table-specific nav:D
-            if(navCount==0){
-            	$(table).parent().append("<div class='paginatedTest'><button type='button' id="+prev+" class='pagenav btn btn-primary active'>prev</button><button type='button' id="+next+" class='pagenav btn btn-primary active'>next</button></div>");
-            	navCount++;
-            }
-
-            if(totalRows<=rowsPerPage){
-            	 $("#"+next).attr("disabled",true);
-            	 $("#"+prev).attr("disabled",true);
-            }
-            else{
-            	$("#"+next).removeAttr("disabled");
-            	$("#"+prev).removeAttr("disabled");
-            } //end disabling buttons
 
             var pageAmount = Math.ceil(totalRows/rowsPerPage); //pages total
             var rowIndex=0; //current row
@@ -142,12 +142,12 @@ $(document).ready(function () {
                         rowIndex++;
                         if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)){
                             $(this).hide();
-                }
+                	}
                         else{
                             $(this).show();
-                }
+                	}
                 
-            });
+            	});
                 }
             });//end prev
 
@@ -166,6 +166,24 @@ $(document).ready(function () {
             });
             }
         });//end next
+
+            $("#"+select).on("change",function(){
+            	rowsPerPage=$(this).val();
+            	pageAmount = Math.ceil(totalRows/rowsPerPage);
+            	rowIndex=0;
+            	page=1;
+            	$(table).find("tr").slice(1).each(function () {
+                	rowIndex++;
+                	if(rowIndex>rowsPerPage){
+                    	$(this).hide();
+                	}
+                	else if(rowIndex<=rowsPerPage){
+                    	$(this).show();
+                	}
+
+            	});
+
+            });
         }
 
 
@@ -261,8 +279,15 @@ $(document).ready(function () {
             //search
             if (settings.search == true)
                 createSearchPanel();
+            
+
             createTable();
+
+             if (settings.paginateTable == true)
+                paginateTable();
+
             return selector;
+
         }
     })(jQuery);
 
