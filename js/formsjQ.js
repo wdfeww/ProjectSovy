@@ -64,7 +64,8 @@ $(document).ready(function () {
 
 
             testDescription: function (desc) {
-                if (desc.length > 0 && desc.indexOf('<') == -1) return true;
+                var tempDesc = desc.replace(/\s+/g, '');
+                if (desc.length > 0 && desc.indexOf('<') == -1 && tempDesc != '') return true;
                 else return false;
             },
 
@@ -95,21 +96,21 @@ $(document).ready(function () {
 
                 if (incomeDescription == false && incomeAmount == false) {
                     $("#incomeDesc").addClass("has-error form-control-error");
-                    $('<div>Incorrect input.</div>').attr("id", "feedback").addClass("error").appendTo("#incomeDesc");
+                    $('<div>Description needs to contain at least one character.</div>').attr("id", "feedback").addClass("error").appendTo("#incomeDesc");
                     $("#incomeAmount").addClass("has-error form-control-error");
-                    $('<div>Incorrect input.</div>').attr("id", "feedback2").addClass("error").appendTo("#incomeAmount");
+                    $('<div>Amount needs to be > or = 1.</div>').attr("id", "feedback2").addClass("error").appendTo("#incomeAmount");
 
                 } else {
                     if (incomeDescription == true && incomeAmount == false) {
                         $("#incomeDesc").removeClass("has-error form-control-error");
                         $("#incomeAmount").addClass("has-error form-control-error");
-                        $('<div>Incorrect input.</div>').attr("id", "feedback2").addClass("error").appendTo("#incomeAmount");
+                        $('<div>Amount needs to be > or = 1.</div>').attr("id", "feedback2").addClass("error").appendTo("#incomeAmount");
 
                     } else {
                         if (incomeDescription == false && incomeAmount == true) {
                             $("#incomeAmount").removeClass("has-error form-control-error");
                             $("#incomeDesc").addClass("has-error form-control-error");
-                            $('<div>Incorrect input.</div>').attr("id", "feedback").addClass("error").appendTo("#incomeDesc");
+                            $('<div>Description needs to contain at least one character.</div>').attr("id", "feedback").addClass("error").appendTo("#incomeDesc");
 
                         }
                     }
@@ -124,21 +125,21 @@ $(document).ready(function () {
 
                 if (paymentDescription == false && paymentAmount == false) {
                     $("#paymentDesc").addClass("has-error form-control-error");
-                    $('<div>Incorrect input.</div>').attr("id", "feedback3").addClass("error").appendTo("#paymentDesc");
+                    $('<div>Description needs to contain at least one character.</div>').attr("id", "feedback3").addClass("error").appendTo("#paymentDesc");
                     $("#paymentAmount").addClass("has-error form-control-error");
-                    $('<div>Incorrect input.</div>').attr("id", "feedback4").addClass("error").appendTo("#paymentAmount");
+                    $('<div>Amount needs to be > or = 1.</div>').attr("id", "feedback4").addClass("error").appendTo("#paymentAmount");
 
                 } else {
                     if (paymentDescription == true && paymentAmount == false) {
                         $("#paymentDesc").removeClass("has-error form-control-error");
                         $("#paymentAmount").addClass("has-error form-control-error");
-                        $('<div>Incorrect input.</div>').attr("id", "feedback4").addClass("error").appendTo("#paymentAmount");
+                        $('<div>Amount needs to be > or = 1.</div>').attr("id", "feedback4").addClass("error").appendTo("#paymentAmount");
 
                     } else {
                         if (paymentDescription == false && paymentAmount == true) {
                             $("#paymentAmount").removeClass("has-error form-control-error");
                             $("#paymentDesc").addClass("has-error form-control-error");
-                            $('<div>Incorrect input.</div>').attr("id", "feedback3").addClass("error").appendTo("#paymentDesc");
+                            $('<div>Description needs to contain at least one character.</div>').attr("id", "feedback3").addClass("error").appendTo("#paymentDesc");
 
                         }
                     }
@@ -174,16 +175,6 @@ $(document).ready(function () {
                     $("#payment-amount").val(null);
                     $("#income-description").val(null);
                     $("#payment-description").val(null);
-                } else {
-                    if (input.testAmount(input.getAmount()) == true && input.testDescription(input.getDescription()) == false) {
-                        $("#income-description").val(null);
-                        $("#payment-description").val(null);
-                    } else {
-                        if (input.testAmount(input.getAmount()) == false && input.testDescription(input.getDescription()) == true) {
-                            $("#income-amount").val(null);
-                            $("#payment-amount").val(null);
-                        }
-                    }
                 }
             }
 
