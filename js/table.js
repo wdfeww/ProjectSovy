@@ -133,6 +133,22 @@ $(document).ready(function () {
                 }
 
             });
+
+            if(page==1){
+                $("#"+prev).prop("disabled", true);
+            }
+            else{
+                $("#"+prev).prop("disabled", false);                
+            }
+
+            if($(tbody).find("tr:last-child").is(":visible")||rowIndex==0){
+                $("#"+next).prop("disabled", true);
+            }
+            else{
+                $("#"+next).prop("disabled", false);
+            }
+            $("#feedback"+tableId).remove();
+            $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page);
             
             $("#"+prev).on("click",function() {
                 if(page>1){
@@ -149,6 +165,24 @@ $(document).ready(function () {
                 
             	});
                 }
+
+                if(page==1){
+                    $("#"+prev).prop("disabled", true);
+                }
+                else{
+                    $("#"+prev).prop("disabled", false);                
+                }
+
+                if($(tbody).find("tr:last-child").is(":visible")||rowIndex==0){
+                    $("#"+next).prop("disabled", true);
+                }
+                else{
+                    $("#"+next).prop("disabled", false);
+                } // end button enable/disable
+
+                $("#feedback"+tableId).remove();
+                $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page);
+
             });//end prev
 
             $("#"+next).on("click",function() {
@@ -165,6 +199,23 @@ $(document).ready(function () {
                 }
             });
             }
+
+            if(page==1){
+                $("#"+prev).prop("disabled", true);
+            }
+            else{
+                $("#"+prev).prop("disabled", false);                
+            }
+
+                if($(tbody).find("tr:last-child").is(":visible")||rowIndex==0){
+                    $("#"+next).prop("disabled", true);
+                }
+                else{
+                    $("#"+next).prop("disabled", false);
+                }
+
+                $("#feedback"+tableId).remove();
+                $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page);
         });//end next
 
             $("#"+select).on("change",function(){
@@ -183,8 +234,10 @@ $(document).ready(function () {
 
             	});
 
+                $("#feedback"+tableId).remove();
+                $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page);
             });
-        }
+        }//end pagination
 
 
 
