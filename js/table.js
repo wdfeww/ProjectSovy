@@ -156,7 +156,7 @@ $(document).ready(function () {
                     rowIndex=0;
                     $(table).find("tr").slice(1).each(function () {
                         rowIndex++;
-                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)){
+                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)|| $(this).hasClass("hideMe")){
                             $(this).hide();
                 	}
                         else{
@@ -173,7 +173,7 @@ $(document).ready(function () {
                     $("#"+prev).prop("disabled", false);                
                 }
 
-                if($(tbody).find("tr:last-child").is(":visible")||rowIndex==0){
+                if($(tbody).find("tr:last-child").is(":visible")||rowIndex<=rowsPerPage){
                     $("#"+next).prop("disabled", true);
                 }
                 else{
@@ -191,7 +191,7 @@ $(document).ready(function () {
                     rowIndex=0;
                     $(table).find("tr").slice(1).each(function () {
                         rowIndex++;
-                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)){
+                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)|| $(this).hasClass("hideMe")){
                             $(this).hide();
                 }
                         else{
@@ -207,7 +207,7 @@ $(document).ready(function () {
                 $("#"+prev).prop("disabled", false);                
             }
 
-                if($(tbody).find("tr:last-child").is(":visible")||rowIndex==0){
+                if($(tbody).find("tr:last-child").is(":visible")||rowIndex<=rowsPerPage){
                     $("#"+next).prop("disabled", true);
                 }
                 else{
