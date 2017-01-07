@@ -282,6 +282,10 @@ $(document).ready(function () {
                 $("#search").on('keyup', function () {
                     var countOfFound = 0;
                     var searchWord = $(this).val();
+                    var searchText = $("#turnovers-table").find("span").html();
+
+                        $("#turnovers-table").find("span").replaceWith(searchText);
+
 
                     if ($(this).val() == "") {
                         $("#turnovers-table>table>tbody").children().removeClass();
@@ -303,12 +307,12 @@ $(document).ready(function () {
                                 });
                                 $("#turnovers-table>table>tbody").children().eq(i).children().eq(1).html(highlightedString);
                                 countOfFound++;
-                            } else if (parseFloat(data[i].amount) == parseFloat(searchWord)) {
+                            } if (parseFloat(data[i].amount) == parseFloat(searchWord)) {
                                 $("#turnovers-table>table>tbody").children().eq(i).removeClass();
                                 var highlightedString = '<span class="highlight">' + data[i].amount + '</span>';
                                 $("#turnovers-table>table>tbody").children().eq(i).children().eq(2).html(highlightedString);
                                 countOfFound++;
-                            } else if (data[i].date.match(reg)) {
+                            }  if (data[i].date.match(reg)) {
                                 $("#turnovers-table>table>tbody").children().eq(i).removeClass();
                                 var highlightedString = (data[i].date).replace(reg, function (str) {
                                     return '<span class="highlight">' + str + '</span>'
