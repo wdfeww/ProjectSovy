@@ -156,7 +156,7 @@ $(document).ready(function () {
                     rowIndex=0;
                     $(table).find("tr").slice(1).each(function () {
                         rowIndex++;
-                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)|| $(this).hasClass("hideMe")){
+                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)){
                             $(this).hide();
                 	}
                         else{
@@ -173,7 +173,7 @@ $(document).ready(function () {
                     $("#"+prev).prop("disabled", false);                
                 }
 
-                if($(tbody).find("tr:last-child").is(":visible")||rowIndex<=rowsPerPage){
+                if($(tbody).find("tr:last-child").is(":visible")||rowIndex==0){
                     $("#"+next).prop("disabled", true);
                 }
                 else{
@@ -191,7 +191,7 @@ $(document).ready(function () {
                     rowIndex=0;
                     $(table).find("tr").slice(1).each(function () {
                         rowIndex++;
-                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)|| $(this).hasClass("hideMe")){
+                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)){
                             $(this).hide();
                 }
                         else{
@@ -207,7 +207,7 @@ $(document).ready(function () {
                 $("#"+prev).prop("disabled", false);                
             }
 
-                if($(tbody).find("tr:last-child").is(":visible")||rowIndex<=rowsPerPage){
+                if($(tbody).find("tr:last-child").is(":visible")||rowIndex==0){
                     $("#"+next).prop("disabled", true);
                 }
                 else{
@@ -282,10 +282,6 @@ $(document).ready(function () {
                 $("#search").on('keyup', function () {
                     var countOfFound = 0;
                     var searchWord = $(this).val();
-                    var searchText = $("#turnovers-table").find("span").html();
-
-                        $("#turnovers-table").find("span").replaceWith(searchText);
-
 
                     if ($(this).val() == "") {
                         $("#turnovers-table>table>tbody").children().removeClass();
@@ -307,12 +303,12 @@ $(document).ready(function () {
                                 });
                                 $("#turnovers-table>table>tbody").children().eq(i).children().eq(1).html(highlightedString);
                                 countOfFound++;
-                            } if (parseFloat(data[i].amount) == parseFloat(searchWord)) {
+                            } else if (parseFloat(data[i].amount) == parseFloat(searchWord)) {
                                 $("#turnovers-table>table>tbody").children().eq(i).removeClass();
                                 var highlightedString = '<span class="highlight">' + data[i].amount + '</span>';
                                 $("#turnovers-table>table>tbody").children().eq(i).children().eq(2).html(highlightedString);
                                 countOfFound++;
-                            }  if (data[i].date.match(reg)) {
+                            } else if (data[i].date.match(reg)) {
                                 $("#turnovers-table>table>tbody").children().eq(i).removeClass();
                                 var highlightedString = (data[i].date).replace(reg, function (str) {
                                     return '<span class="highlight">' + str + '</span>'

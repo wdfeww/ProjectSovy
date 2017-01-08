@@ -49,6 +49,12 @@
                         <li id="incomes-tab"><a data-toggle="tab" href="#incomes" onclick="collapseNav()">Incomes</a></li>
                         <li id="payments-tab"><a data-toggle="tab" href="#payments" onclick="collapseNav()">Payments</a></li>
                         <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Charts<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a data-toggle="tab" href="#charts" onclick="collapseNav()">Turnover history</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a data-toggle="tab" href="#euro-calculator" onclick="collapseNav()">Euro Calculator</a></li>
@@ -63,8 +69,7 @@
     <div class="container">
         <p align="right" id="acc-balance" class="balance">
             <span class="balance-click">Account Balance</span><br />
-            <span class="balance-value balance-click" id="balance-value">0.00</span><br />
-            <span class="balance balance-click" id="show-chart">(show chart)</span></p>
+            <span class="balance-value balance-click" id="balance-value">0.00</span></p>
         <!--tab content-->
         <div class="tab-content">
             <!--HOME-->
@@ -159,15 +164,20 @@
 
             </div>
             <!--END PAYMENTS-->
-
-            <!--EURO CALCULATOR-->
-
-            <div id="euro-calculator" class="tab-pane fade in">
-
-               <div id="calc"></div>
-
-                <!--END EURO CALCULATOR-->
+            <!--Charts-->
+            <div id="charts" class="tab-pane fade in">
+                <h3>Turnovers history</h3>
+                    <div class="chartBox">
+                        <div id="chartContainer"></div>
+                        <div id="chartContainer2"></div>
+                    </div>
             </div>
+            <!--END charts-->
+            <!--EURO CALCULATOR-->
+            <div id="euro-calculator" class="tab-pane fade in">
+               <div id="calc"></div>
+            </div>
+                <!--END EURO CALCULATOR-->
             <!--end tab content-->
         </div>
         <!--end background div-->
@@ -187,14 +197,6 @@
             </div>
         </div>
     </footer>
-    <!-- Chart container -->
-    <div id="chartWindow">
-        <div class="chartBox">
-            <span class="closeChart">&times;</span>
-            <div id="chartContainer"></div>
-        </div>   
-    </div>
-    <!-- end of Chart container -->
 </body>
 
 </html>

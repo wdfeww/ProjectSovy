@@ -22,12 +22,17 @@ function initChart(data, dataIndex, deletedAmount) {
       }
       allSums[data.length-1]=sum;
 
-      var lengthData = data.length-1;
+      if (data.length == 0){
+        allSums[0]=0;
+        allSums[0]=sum;
+      }
+
+      /*var lengthData = data.length-1;
       var year = parseInt(data[lengthData].date.split(".")[2], 10);
       var month = parseInt(data[lengthData].date.split(".")[1], 10);
       month-=1;
       var day = parseInt(data[lengthData].date.split(".")[0], 10);
-      var minuten = parseInt(data[lengthData].date.split(" ")[3], 10);
+      var minuten = parseInt(data[lengthData].date.split(" ")[3], 10);*/
       
       var chart = new CanvasJS.Chart("chartContainer",
       {
@@ -44,6 +49,13 @@ function initChart(data, dataIndex, deletedAmount) {
         
       }); 
       chart.render();
+      if(allSums.length < 4){
+        for (i=4; i>allSums.length; i--){
+          dataPoints[i]={
+            y : null
+          };
+        }
+      }
       for (i=0; i<allSums.length; i++) {
         dataPoints[allSums.length]=
         {
@@ -53,21 +65,30 @@ function initChart(data, dataIndex, deletedAmount) {
           y : allSums[i]
         };
       }
+
       chart.render();
    //   console.log(dataPoints);
+        console.log(dataPoints);
+        if (dispChart != 0) {
+          
+          $("#chartContainer2").css("display", "none");
+        }
 }
 
-$(document).ready(function () {
-  
-  $(".balance-click").on("click", function () {
-     if (dispChart != 0){
-      $("#chartWindow").css("display", "block");
-     }
-  });
-  $(".closeChart").on("click", function () {
-    $("#chartWindow").css("display", "none");
-  });
-  $("#chartWindow").click(function (event) {
-    $("#chartWindow").css("display", "none");
-  });
-});
+window.onload = function() {
+    var chart = new CanvasJS.Chart("chartContainer2", {
+      title: {
+        text: "Turnovers"
+      },
+      data: [{
+        type: "line",
+        dataPoints: [
+        {  y: 0 },
+        {  y: null},
+        {  y: null },
+        {  y: null }
+        ]
+      }]
+    });
+    chart.render();
+}
