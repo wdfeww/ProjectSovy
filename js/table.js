@@ -125,7 +125,7 @@ $(document).ready(function () {
 
             $(table).find("tr").slice(1).each(function () {
                 rowIndex++;
-                if(rowIndex>rowsPerPage){
+                if((rowIndex>rowsPerPage)||$(this).hasClass("hideMe")){
                     $(this).hide();
                 }
                 else if(rowIndex<=rowsPerPage){
@@ -148,7 +148,8 @@ $(document).ready(function () {
                 $("#"+next).prop("disabled", false);
             }
             $("#feedback"+tableId).remove();
-            $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page);
+            if(rowIndex>0)
+            $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page+" of "+pageAmount);
             
             $("#"+prev).on("click",function() {
                 if(page>1){
@@ -156,7 +157,7 @@ $(document).ready(function () {
                     rowIndex=0;
                     $(table).find("tr").slice(1).each(function () {
                         rowIndex++;
-                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)){
+                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)||$(this).hasClass("hideMe")){
                             $(this).hide();
                 	}
                         else{
@@ -181,7 +182,8 @@ $(document).ready(function () {
                 } // end button enable/disable
 
                 $("#feedback"+tableId).remove();
-                $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page);
+                if(rowIndex>0)
+                $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page+" of "+pageAmount);
 
             });//end prev
 
@@ -191,7 +193,7 @@ $(document).ready(function () {
                     rowIndex=0;
                     $(table).find("tr").slice(1).each(function () {
                         rowIndex++;
-                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)){
+                        if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)||$(this).hasClass("hideMe")){
                             $(this).hide();
                 }
                         else{
@@ -199,8 +201,7 @@ $(document).ready(function () {
                 }
             });
             }
-
-            if(page==1){
+            if(page==1){//disabling buttons here
                 $("#"+prev).prop("disabled", true);
             }
             else{
@@ -215,7 +216,8 @@ $(document).ready(function () {
                 }
 
                 $("#feedback"+tableId).remove();
-                $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page);
+                if(rowIndex>0)
+                $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page+" of "+pageAmount);
         });//end next
 
             $("#"+select).on("change",function(){
@@ -235,8 +237,10 @@ $(document).ready(function () {
             	});
 
                 $("#feedback"+tableId).remove();
-                $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page);
+                if(rowIndex>0)
+                $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page+" of "+pageAmount);
             });
+
         }//end pagination
 
 
