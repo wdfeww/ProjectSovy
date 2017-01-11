@@ -261,6 +261,14 @@ $(document).ready(function () {
             initChart(allData, dataIndex, deletedAmount);
         });
 
+        $('#income-amount, #payment-amount').on('keypress', function (event) {
+            var regex = new RegExp("^[.0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
 
     })(jQuery);
 
