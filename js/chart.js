@@ -1,14 +1,14 @@
+/**
+ * @author Rastislav Ruščák
+ * @description function for filling chart with data
+ */
 var dataPoints = [];
 var allSums = [];
 var dispChart = 0;
 
 function initChart(data, dataIndex, deletedAmount) {
       var sum=0;
-      if (data.length == 0)
-        dispChart=0;
-      else
-        dispChart=1;
-      
+
       for (i=0; i<data.length; i++) {
         sum += data[i].amount;
       }
@@ -16,24 +16,16 @@ function initChart(data, dataIndex, deletedAmount) {
         for (i=dataIndex; i<data.length; i++) {
           allSums[i]=allSums[i+1]-deletedAmount;
         }
-      }
-      if (deletedAmount != 0) {
         allSums.splice( data.length, 1);
       }
       allSums[data.length-1]=sum;
 
       if (data.length == 0){
-        allSums[0]=0;
         allSums[0]=sum;
       }
-
-      /*var lengthData = data.length-1;
-      var year = parseInt(data[lengthData].date.split(".")[2], 10);
-      var month = parseInt(data[lengthData].date.split(".")[1], 10);
-      month-=1;
-      var day = parseInt(data[lengthData].date.split(".")[0], 10);
-      var minuten = parseInt(data[lengthData].date.split(" ")[3], 10);*/
-      
+      else {
+        $("#chartContainer2").css("display", "none");
+      }
       var chart = new CanvasJS.Chart("chartContainer",
       {
         title:{
@@ -46,9 +38,7 @@ function initChart(data, dataIndex, deletedAmount) {
             dataPoints : dataPoints
         }
         ]
-        
       }); 
-      chart.render();
       if(allSums.length < 4){
         for (i=4; i>allSums.length; i--){
           dataPoints[i]={
@@ -65,14 +55,7 @@ function initChart(data, dataIndex, deletedAmount) {
           y : allSums[i]
         };
       }
-
       chart.render();
-   //   console.log(dataPoints);
-        console.log(dataPoints);
-        if (dispChart != 0) {
-          
-          $("#chartContainer2").css("display", "none");
-        }
 }
 
 window.onload = function() {
