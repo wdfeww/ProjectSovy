@@ -114,6 +114,28 @@ $(document).ready(function () {
             	navCount++;
             }
             var rowsPerPage=$("#"+select).val();
+            
+            function setButtons (){
+            if(page==1){
+                $("#"+prev).prop("disabled", true);
+            }
+            else{
+                $("#"+prev).prop("disabled", false);                
+            }
+
+            if($(tbody).find("tr:last-child").is(":visible")||rowIndex==0){
+                $("#"+next).prop("disabled", true);
+            }
+            else{
+                $("#"+next).prop("disabled", false);
+            }
+            }
+
+            function setNumbering(){
+            	$("#feedback"+tableId).remove();
+            	if(rowIndex>0)
+                $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page+" of "+pageAmount);
+            }
 
             $(table).find("tr").slice(1).each(function(){
                 totalRows++;
@@ -133,23 +155,9 @@ $(document).ready(function () {
                 }
 
             });
-
-            if(page==1){
-                $("#"+prev).prop("disabled", true);
-            }
-            else{
-                $("#"+prev).prop("disabled", false);                
-            }
-
-            if($(tbody).find("tr:last-child").is(":visible")||rowIndex==0){
-                $("#"+next).prop("disabled", true);
-            }
-            else{
-                $("#"+next).prop("disabled", false);
-            }
-            $("#feedback"+tableId).remove();
-            if(rowIndex>0)
-            $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page+" of "+pageAmount);
+            setButtons();
+            setNumbering();
+            
             
             $("#"+prev).on("click",function() {
                 if(page>1){
@@ -166,24 +174,8 @@ $(document).ready(function () {
                 
             	});
                 }
-
-                if(page==1){
-                    $("#"+prev).prop("disabled", true);
-                }
-                else{
-                    $("#"+prev).prop("disabled", false);                
-                }
-
-                if($(tbody).find("tr:last-child").is(":visible")||rowIndex==0){
-                    $("#"+next).prop("disabled", true);
-                }
-                else{
-                    $("#"+next).prop("disabled", false);
-                } // end button enable/disable
-
-                $("#feedback"+tableId).remove();
-                if(rowIndex>0)
-                $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page+" of "+pageAmount);
+                setButtons();
+                setNumbering();
 
             });//end prev
 
@@ -201,23 +193,8 @@ $(document).ready(function () {
                 }
             });
             }
-            if(page==1){//disabling buttons here
-                $("#"+prev).prop("disabled", true);
-            }
-            else{
-                $("#"+prev).prop("disabled", false);                
-            }
-
-                if($(tbody).find("tr:last-child").is(":visible")||rowIndex==0){
-                    $("#"+next).prop("disabled", true);
-                }
-                else{
-                    $("#"+next).prop("disabled", false);
-                }
-
-                $("#feedback"+tableId).remove();
-                if(rowIndex>0)
-                $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page+" of "+pageAmount);
+            setButtons();
+            setNumbering();
         });//end next
 
             $("#"+select).on("change",function(){
@@ -235,10 +212,7 @@ $(document).ready(function () {
                 	}
 
             	});
-
-                $("#feedback"+tableId).remove();
-                if(rowIndex>0)
-                $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page+" of "+pageAmount);
+            	setNumbering();
             });
 
         }//end pagination
