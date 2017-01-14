@@ -12,16 +12,19 @@ $(document).ready(function () {
         var button = $('.submit-button');
         var incomesTable = $('#incomes-table').initTable({
             cols: ['Date', 'Description', 'Amount', 'Delete'],
-            paginateTable:true
+            paginateTable:true,
+            sortTable : true
         });
         var paymentsTable = $('#payments-table').initTable({
             cols: ['Date', 'Description', 'Amount', 'Delete'],
-            paginateTable:true
+            paginateTable:true,
+            sortTable:true
         });
         var turnoversTable = $('#turnovers-table').initTable({
             cols: ['Date', 'Description', 'Amount'],
             search: true,
-            paginateTable:true
+            paginateTable:true,
+            sortTable:true
         });
         var data = turnoversTable.getAllData();
         

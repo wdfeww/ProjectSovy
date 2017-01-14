@@ -4,6 +4,8 @@ $(document).ready(function () {
             var selector = this;
             var tbody = $('<tbody/>');
             var table = $('<table/>');
+            var dateIndex;
+            var amountIndex;
             var dataIncomes = [];
             var dataPayments = [];
             var data = [];
@@ -11,8 +13,97 @@ $(document).ready(function () {
                 cols: [],
                 search: false,
                 deletePicture: $('<img/>', {src: 'images/x.gif'}),
-                paginateTable:false
+                paginateTable:false,
+                sortTable : false
             }, options);
+            var sortWay;
+            var sortedData = [];
+
+            function sortData (dataType) {
+                var selectorId = selector.attr('id');
+
+                if (dataType == 'amount') {
+                    if(selectorId == 'incomes-table'){
+                        sortTableByAmount(dataIncomes);
+                    }
+                    else if(selectorId == 'payments-table'){
+                        sortTableByAmount(dataPayments);
+                    }
+                    else{
+                        sortTableByAmount(data);
+                    }
+                }
+                else if (dataType == 'date') {
+                    if(selectorId == 'incomes-table'){
+                        sortTableByDate(dataIncomes);
+                    }
+                    else if(selectorId == 'payments-table'){
+                        sortTableByDate(dataPayments);
+                    }
+                    else{
+                        sortTableByDate(data);
+                    }
+                }
+            }
+
+            function refillTable () {
+                var k = 0;
+
+                for(var i = 0, length1 = sortedData.length; i < length1; i++){
+                    var tbody = selector.find('tbody');
+                    var row = tbody.find('tr').eq(i);
+                    $.each(sortedData[i], function (name,value) {
+                        var col = row.find('td').eq(k);
+                        col.html(value);
+                        k++;
+                    });
+                    k = 0;
+                }
+            }
+
+            function sortTableByAmount (dataToSort) {
+                var temp;
+
+                sortedData = Object.assign([], dataToSort);
+                if(sortWay == true){  
+                    for(var i = 1, length1 = sortedData.length; i < length1; i++){
+                        for(var j = 0, length1 = sortedData.length; j < length1-i; j++){
+                            if (sortedData[j].amount > sortedData[j+1].amount) {
+                                temp = sortedData[j];
+                                sortedData[j] = sortedData[j+1];
+                                sortedData[j+1] = temp;
+                            }
+                        }
+                    }
+                    sortWay = false;
+                }
+                else{
+                    for(var i = 1, length1 = sortedData.length; i < length1; i++){
+                        for(var j = 0, length1 = sortedData.length; j < length1-i; j++){
+                            if (sortedData[j].amount < sortedData[j+1].amount) {
+                                temp = sortedData[j];
+                                sortedData[j] = sortedData[j+1];
+                                sortedData[j+1] = temp;
+                            }
+                        }
+                    }
+                    sortWay = true;
+                }
+            }
+
+            function sortTableByDate (dataToSort) {
+                var length = dataToSort.length - 1;
+                var j = 0;
+
+                sortedData = Object.assign([], dataToSort);
+                if(sortWay == true){
+                    sortWay = false;
+                }
+                else{
+                    sortedData.reverse();
+                    sortWay = true;
+                }
+            }
 
             selector.getDate = function () {
                 var y = new Date();
@@ -54,9 +145,9 @@ $(document).ready(function () {
                 var amount;
                 var description;
                 var object = {
+                    date: null,
                     description: null,
-                    amount: null,
-                    date: null
+                    amount: null
                 };
 
                 for (var i = 0, length1 = rowData.length; i < length1; i++) {
@@ -71,7 +162,6 @@ $(document).ready(function () {
                         object.description = rowData[i];
                     }
                 }
-
                 if (object.amount < 0) dataPayments.push(object);
                 else dataIncomes.push(object);
                 data.push(object);
@@ -219,10 +309,6 @@ $(document).ready(function () {
 
 
 
-            selector.sortTableByAmount = function (tableName) {
-                selector.find('tr').eq(0);
-            }
-
             selector.getIncomesData = function () {
                 return dataIncomes;
             }
@@ -317,9 +403,40 @@ $(document).ready(function () {
              if (settings.paginateTable == true)
                 paginateTable();
 
+            if (settings.sortTable == true){
+                var upCaret = $('<span class="dropup"><span class="caret"></span></span>');
+                var caret = $('<span class="caret"></span>');
+                selector.find('th').eq(0).on('click', function () {
+                    if(sortWay == true){
+                        caret.remove();
+                        $(this).append(upCaret);
+                    }
+                    else{
+                        upCaret.remove();
+                        $(this).append(caret);
+                    }
+
+                    sortData('date');
+                    refillTable();
+                });
+                selector.find('th').eq(2).on('click', function () {
+                    if(sortWay == true){
+                        caret.remove();
+                        $(this).append(upCaret);
+                    }
+                    else{
+                        upCaret.remove();
+                        $(this).append(caret);
+                    }
+                    sortData('amount');
+                    refillTable();
+                })
+            }
+
             return selector;
 
         }
+
     })(jQuery);
 
 });
