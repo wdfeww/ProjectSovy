@@ -44,6 +44,17 @@ $(document).ready(function () {
                         sortTableByDate(data);
                     }
                 }
+                else if (dataType == 'description') {
+                    if(selectorId == 'incomes-table'){
+                        sortTableByDescription(dataIncomes);
+                    }
+                    else if(selectorId == 'payments-table'){
+                        sortTableByDescription(dataPayments);
+                    }
+                    else{
+                        sortTableByDescription(data);
+                    }
+                }
             }
 
             function refillTable () {
@@ -65,43 +76,47 @@ $(document).ready(function () {
                 var temp;
 
                 sortedData = Object.assign([], dataToSort);
-                if(sortWay == true){  
-                    for(var i = 1, length1 = sortedData.length; i < length1; i++){
-                        for(var j = 0, length1 = sortedData.length; j < length1-i; j++){
-                            if (sortedData[j].amount > sortedData[j+1].amount) {
-                                temp = sortedData[j];
-                                sortedData[j] = sortedData[j+1];
-                                sortedData[j+1] = temp;
-                            }
-                        }
-                    }
-                    sortWay = false;
+                sortedData.sort(function (a ,b) {
+                    var a = a.amount;
+                    var b = b.amount;
+                    return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+                });
+
+                if(sortWay == 'asc'){  
+                    sortWay = 'desc';
                 }
                 else{
-                    for(var i = 1, length1 = sortedData.length; i < length1; i++){
-                        for(var j = 0, length1 = sortedData.length; j < length1-i; j++){
-                            if (sortedData[j].amount < sortedData[j+1].amount) {
-                                temp = sortedData[j];
-                                sortedData[j] = sortedData[j+1];
-                                sortedData[j+1] = temp;
-                            }
-                        }
-                    }
-                    sortWay = true;
+                    sortedData.reverse();
+                    sortWay = 'asc';
                 }
             }
 
             function sortTableByDate (dataToSort) {
-                var length = dataToSort.length - 1;
                 var j = 0;
 
                 sortedData = Object.assign([], dataToSort);
-                if(sortWay == true){
-                    sortWay = false;
+                if(sortWay == 'asc'){
+                    sortWay = 'desc';
                 }
                 else{
                     sortedData.reverse();
-                    sortWay = true;
+                    sortWay = 'asc';
+                }
+            }
+
+            function sortTableByDescription (dataToSort) {
+                sortedData = Object.assign([], dataToSort);
+                sortedData.sort(function (a, b) {
+                    var a = a.description;
+                    var b = b.description;
+                    return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+                });
+                if(sortWay == 'asc'){
+                    sortedData.reverse();
+                    sortWay = 'desc';
+                }
+                else{
+                    sortWay = 'asc';
                 }
             }
 
@@ -407,7 +422,7 @@ $(document).ready(function () {
                 var upCaret = $('<span class="dropup"><span class="caret"></span></span>');
                 var caret = $('<span class="caret"></span>');
                 selector.find('th').eq(0).on('click', function () {
-                    if(sortWay == true){
+                    if(sortWay == 'asc'){
                         caret.remove();
                         $(this).append(upCaret);
                     }
@@ -420,7 +435,7 @@ $(document).ready(function () {
                     refillTable();
                 });
                 selector.find('th').eq(2).on('click', function () {
-                    if(sortWay == true){
+                    if(sortWay == 'asc'){
                         caret.remove();
                         $(this).append(upCaret);
                     }
@@ -430,7 +445,19 @@ $(document).ready(function () {
                     }
                     sortData('amount');
                     refillTable();
-                })
+                });
+                selector.find('th').eq(1).on('click', function () {
+                    if(sortWay == 'asc'){
+                        caret.remove();
+                        $(this).append(upCaret);
+                    }
+                    else{
+                        upCaret.remove();
+                        $(this).append(caret);
+                    }
+                    sortData('description');
+                    refillTable();
+                });
             }
 
             return selector;
