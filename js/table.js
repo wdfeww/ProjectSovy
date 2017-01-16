@@ -128,11 +128,11 @@ $(document).ready(function () {
                 var min = new Date();
                 var zero;
 
-                y = y.getUTCFullYear();
-                m = m.getUTCMonth() + 1;
-                d = d.getUTCDate();
-                h = h.getUTCHours() + 1;
-                min = ((parseInt(min.getUTCMinutes()) < 10) ? '0' : '') + min.getUTCMinutes();
+                y = y.getFullYear();
+                m = m.getMonth() + 1;
+                d = d.getDate();
+                h = h.getHours();
+                min = ((parseInt(min.getMinutes()) < 10) ? '0' : '') + min.getMinutes();
 
 
                 var dateString = d + "." + m + "." + y + " " + h + ":" + min;
