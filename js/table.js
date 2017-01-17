@@ -228,7 +228,7 @@ $(document).ready(function () {
                 $("#"+prev).prop("disabled", false);                
             }
 
-            if($(tbody).find("tr:last-child").is(":visible")||rowIndex==0){
+            if((page==pageAmount)||rowIndex==0){
                 $("#"+next).prop("disabled", true);
             }
             else{
@@ -315,6 +315,7 @@ $(document).ready(function () {
                 	}
 
             	});
+                setButtons();
             	setNumbering();
             });
 
