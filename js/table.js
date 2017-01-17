@@ -242,15 +242,13 @@ $(document).ready(function () {
                 $(table).parent().append("<p id='feedback"+tableId+"' class='paginationTitle'>Page "+page+" of "+pageAmount);
             }
 
-            $(table).find("tr").slice(1).each(function(){
-                totalRows++;
-            });//determines row count
+            totalRows = $(table).find("tr").not(".hideMe").length - 1;
 
             var pageAmount = Math.ceil(totalRows/rowsPerPage); //pages total
             var rowIndex=0; //current row
             var page=1; // current page
 
-            $(table).find("tr").slice(1).each(function () {
+            $(table).find("tr").not(".hideMe").slice(1).each(function () {
                 rowIndex++;
                 if((rowIndex>rowsPerPage)||$(this).hasClass("hideMe")){
                     $(this).hide();
@@ -268,7 +266,7 @@ $(document).ready(function () {
                 if(page>1){
                 page--;
                     rowIndex=0;
-                    $(table).find("tr").slice(1).each(function () {
+                    $(table).find("tr").not(".hideMe").slice(1).each(function () {
                         rowIndex++;
                         if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)||$(this).hasClass("hideMe")){
                             $(this).hide();
@@ -288,7 +286,7 @@ $(document).ready(function () {
                 if(page<pageAmount){
                     page++;
                     rowIndex=0;
-                    $(table).find("tr").slice(1).each(function () {
+                    $(table).find("tr").not(".hideMe").slice(1).each(function () {
                         rowIndex++;
                         if(rowIndex>(rowsPerPage*page)||rowIndex<=((rowsPerPage*page)-rowsPerPage)||$(this).hasClass("hideMe")){
                             $(this).hide();
@@ -307,7 +305,7 @@ $(document).ready(function () {
             	pageAmount = Math.ceil(totalRows/rowsPerPage);
             	rowIndex=0;
             	page=1;
-            	$(table).find("tr").slice(1).each(function () {
+            	$(table).find("tr").not(".hideMe").slice(1).each(function () {
                 	rowIndex++;
                 	if(rowIndex>rowsPerPage){
                     	$(this).hide();
@@ -407,6 +405,8 @@ $(document).ready(function () {
                     }
                     else{$("#countOfFound").text("Found: " + (countOfFound) + " results");
                     }
+                    if (settings.paginateTable == true)
+                        paginateTable();
                 });
             }
             //search
