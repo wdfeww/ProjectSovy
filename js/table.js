@@ -64,6 +64,10 @@ $(document).ready(function () {
                     var tbody = selector.find('tbody');
                     var row = tbody.find('tr').eq(i);
                     $.each(sortedData[i], function (name,value) {
+                        if(sortedData[i].amount > 0)
+                            row.css('background-color', 'rgb(140, 217, 140)');
+                        else
+                            row.css('background-color', 'rgb(255, 153, 128)');
                         var col = row.find('td').eq(k);
                         col.html(value);
                         k++;
