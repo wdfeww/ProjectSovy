@@ -259,12 +259,12 @@ table {
     z-index: 10;
 }
 #chartContainer2 {
-    width: 100%;
+    maxwidth: 100%;
     margin: auto;
     z-index: 5;
 }
 .chartBox {
-    width: 500px;
+    max-width: 500px;
     height: 400px;
     z-index: 9001;
     top: 50%;

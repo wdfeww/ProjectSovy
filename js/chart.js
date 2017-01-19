@@ -4,7 +4,6 @@
  */
 var dataPoints = [];
 var allSums = [];
-var dispChart = 0;
 
 function initChart(data, dataIndex, deletedAmount) {
       var sum=0;
