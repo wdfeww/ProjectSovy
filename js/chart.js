@@ -25,35 +25,63 @@ function initChart(data, dataIndex, deletedAmount) {
       else {
         $("#chartContainer2").css("display", "none");
       }
+
+      var year = [];
+      var month = [];
+      var day = [];
+      var seconds = [];
+      var minutes = [];
+      var hours = [];
+
+      for (i=0; i<data.length; i++) {
+        year[i] = parseInt(data[i].date.split(".")[2], 10);
+        month[i] = parseInt(data[i].date.split(".")[1], 10);
+        month[i]-=1;
+        day[i] = parseInt(data[i].date.split(".")[0], 10);
+        seconds[i] = parseInt(data[i].date.split(":")[2], 10);
+        minutes[i] = parseInt(data[i].date.split(":")[1], 10);
+        hours[i] = parseInt(data[i].date.split(" ")[1], 10);
+      }
+
       var chart = new CanvasJS.Chart("chartContainer",
       {
         title:{
         text: "Turnovers"
         },
-        
+        toolTip: {
+        contentFormatter: function (e) {
+          var content = "";
+          for (var i = 0; i < e.entries.length; i++){
+            content = CanvasJS.formatDate(e.entries[i].dataPoint.x, "HH:mm:ss")+"<br><strong>"+e.entries[i].dataPoint.y+"</strong>";       
+          }       
+          return content;
+        }
+        },  
+        axisX:{
+            title: "Date",
+            valueFormatString: "DD.MM.YY" ,
+            titleFontColor: "#5CA7A7",
+        },
+        axisY: {
+            title: "Amount",
+            titleFontColor: "#5CA7A7",
+        },
          data: [
         {
           type: "line",
-            dataPoints : dataPoints
+          xValueType: "dateTime",
+          dataPoints : dataPoints
         }
         ]
       }); 
-      if(allSums.length < 4){
-        for (i=4; i>allSums.length; i--){
-          dataPoints[i]={
-            y : null
-          };
-        }
-      }
       for (i=0; i<allSums.length; i++) {
-        dataPoints[allSums.length]=
-        {
-          y : null
-        };
         dataPoints[i]={
-          y : allSums[i]
+          x: new Date(year[i], month[i], day[i], hours[i], minutes[i], seconds[i], 0), y : allSums[i]
         };
       }
+      dataPoints[allSums.length]={
+        x: new Date(year[i], month[i], day[i], hours[i], minutes[i], seconds[i], 0), y : null
+      };
       chart.render();
 }
 
@@ -62,13 +90,23 @@ window.onload = function() {
       title: {
         text: "Turnovers"
       },
+      toolTip: {
+        content: "{y}",
+      },
+      axisX:{
+            title: "Date",
+            valueFormatString: "YYYY",
+            titleFontColor: "#5CA7A7",
+            valueFormatString: " ",
+        },
+      axisY: {
+          title: "Amount",
+          titleFontColor: "#5CA7A7",
+      },
       data: [{
         type: "line",
         dataPoints: [
-        {  y: 0 },
-        {  y: null},
-        {  y: null },
-        {  y: null }
+        {  x: new Date(2017, 01, 1), y: 0 }
         ]
       }]
     });

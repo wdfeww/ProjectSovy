@@ -124,13 +124,16 @@ $(document).ready(function () {
                 var d = new Date();
                 var h = new Date();
                 var min = new Date();
+                var s = new Date();
                 var zero;
+
                 y = y.getFullYear();
                 m = m.getMonth() + 1;
                 d = d.getDate();
                 h = h.getHours();
+                s = s.getSeconds();
                 min = ((parseInt(min.getMinutes()) < 10) ? '0' : '') + min.getMinutes();
-                var dateString = d + "." + m + "." + y + " " + h + ":" + min;
+                var dateString = d + "." + m + "." + y + " " + h + ":" + min + ":" + s;
                 return dateString;
             }
 
