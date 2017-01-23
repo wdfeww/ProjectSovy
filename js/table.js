@@ -387,6 +387,7 @@ $(document).ready(function () {
             createTable();
             if (settings.paginateTable == true) paginateTable();
             if (settings.sortTable == true) {
+                selector.find('th').css('cursor', 'pointer');
                 var upCaret = $('<span class="dropup"><span class="caret"></span></span>');
                 var caret = $('<span class="caret"></span>');
                 selector.find('th').eq(0).on('click', function () {
