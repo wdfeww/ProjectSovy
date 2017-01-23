@@ -52,7 +52,6 @@ function initChart(data, dataIndex, deletedAmount) {
             contentFormatter: function (e) {
                 var content = "";
                 for (var i = 0; i < e.entries.length; i++){
-                    var i = e.entries.length-1;
                     content = "Date: "+CanvasJS.formatDate(e.entries[i].dataPoint.z, "DD.MM.YYYY <br>'T'i'm'e: HH:mm:ss")+"<br><strong>Balance: "+e.entries[i].dataPoint.y+"</strong>";       
                 }       
                 return content;
