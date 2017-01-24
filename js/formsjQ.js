@@ -101,13 +101,13 @@ $(document).ready(function () {
                     $("#incomeDesc").addClass("has-error form-control-error");
                     $('<div>Description needs to contain at least one character.</div>').attr("id", "feedback").addClass("error").appendTo("#incomeDesc");
                     $("#incomeAmount").addClass("has-error form-control-error");
-                    $('<div>Amount needs to be > or = 1.</div>').attr("id", "feedback2").addClass("error").appendTo("#incomeAmount");
+                    $('<div>Amount needs to be > or = 1 with maximum of 2 decimal points.</div>').attr("id", "feedback2").addClass("error").appendTo("#incomeAmount");
 
                 } else {
                     if (incomeDescription == true && incomeAmount == false) {
                         $("#incomeDesc").removeClass("has-error form-control-error");
                         $("#incomeAmount").addClass("has-error form-control-error");
-                        $('<div>Amount needs to be > or = 1.</div>').attr("id", "feedback2").addClass("error").appendTo("#incomeAmount");
+                        $('<div>Amount needs to be > or = 1 with maximum of 2 decimal points.</div>').attr("id", "feedback2").addClass("error").appendTo("#incomeAmount");
 
                     } else {
                         if (incomeDescription == false && incomeAmount == true) {
@@ -130,13 +130,13 @@ $(document).ready(function () {
                     $("#paymentDesc").addClass("has-error form-control-error");
                     $('<div>Description needs to contain at least one character.</div>').attr("id", "feedback3").addClass("error").appendTo("#paymentDesc");
                     $("#paymentAmount").addClass("has-error form-control-error");
-                    $('<div>Amount needs to be > or = 1.</div>').attr("id", "feedback4").addClass("error").appendTo("#paymentAmount");
+                    $('<div>Amount needs to be > or = 1 with maximum of 2 decimal points.</div>').attr("id", "feedback4").addClass("error").appendTo("#paymentAmount");
 
                 } else {
                     if (paymentDescription == true && paymentAmount == false) {
                         $("#paymentDesc").removeClass("has-error form-control-error");
                         $("#paymentAmount").addClass("has-error form-control-error");
-                        $('<div>Amount needs to be > or = 1.</div>').attr("id", "feedback4").addClass("error").appendTo("#paymentAmount");
+                        $('<div>Amount needs to be > or = 1 with maximum of 2 decimal points.</div>').attr("id", "feedback4").addClass("error").appendTo("#paymentAmount");
 
                     } else {
                         if (paymentDescription == false && paymentAmount == true) {
